@@ -55,8 +55,8 @@ body{
 }
 
 .gallery-item-1{
-  left: 15%;
-  opacity: .4;
+  left: -15%;
+  opacity: .5;
   transform: translateX(-50%);
 }
 
@@ -68,7 +68,7 @@ body{
 }
 
 .gallery-item-2{
-  left: 30%;
+  left: 10%;
   transform: translateX(-50%);
 }
 
@@ -83,22 +83,22 @@ body{
 }
 
 .gallery-item-4{
-  left: 70%;
-  opacity: .4;
+  left: 90%;
   transform: translateX(-50%);
 }
 
 .gallery-item-5{
-  left: 85%;
-  opacity: .4;
+  left: 115%;
+  opacity: .5;
   transform: translateX(-50%);
 }
 
 .gallery-controls{
   display: flex;
-  justify-content: center;
-  margin: 25px 0;
-  height: 100px;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px; 
+  margin: 25px auto; 
 }
 
 .gallery-controls button{
@@ -106,9 +106,10 @@ body{
   border: 0;
   cursor: pointer;
   font-size: 30px;
-  margin: 0 50px;
+  margin: 0;
   padding: 0 12px;
   text-transform: capitalize;
+  position: relative
 }
 
 .gallery-controls-button:focus{
@@ -128,7 +129,6 @@ body{
   left: -30px;
   padding: 10px;
   position: absolute;
-  top: 25%;
   transform: rotate(135deg) translateY(-50%);
   transition: left 0.15s ease-in-out;
   width: 5px;
@@ -152,8 +152,8 @@ body{
   position: absolute;  
   right: -30px;
   top: 45%;
-  transform: rotate(-40deg) translateY(-50%);
-  transition: left 0.15s ease-in-out;
+  transform: rotate(-45deg) translateY(-50%);
+  transition: right 0.15s ease-in-out;
   width: 5px;
 }
 
