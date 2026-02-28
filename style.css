@@ -6,13 +6,13 @@ html, body {
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 10px;
   font-weight: 900;
 }
 
 h2 {
-  color: #333;
+  color: #ffffff;
   font-size: 15px;
   margin: 0;
   text-align: center;
@@ -51,10 +51,18 @@ body{
   width: 330px;
   z-index: 0;
   border-radius: 15px;
-  background-size: contain;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .gallery-item-1{
+  height: 200px;
   left: -15%;
   opacity: .5;
   transform: translateX(-50%);
@@ -74,12 +82,18 @@ body{
 
 .gallery-item-3{
   box-shadow: -2px 5px 33px 6px rgba(0,0,0,0.35);
-  height: 300px;
+  height: 500px;
   opacity: 1;
   left: 50%;
   transform: translateX(-50%);
   width:430px;
   z-index: 2;
+  margin-top: 200px;
+  background-color: black
+}
+
+.gallery-item-3 img{
+  height: 420px;
 }
 
 .gallery-item-4{
@@ -95,8 +109,9 @@ body{
 
 .gallery-controls{
   display: flex;
-  justify-content: space-between;
+  justify-content: center; 
   align-items: center;
+  gap: 500px;                 
   max-width: 1000px; 
   margin: 25px auto; 
 }
@@ -125,11 +140,12 @@ body{
   border-width: 0 5px 5px 0;
   content: '';
   display: inline-block;
-  height: 5px;
+  height: 2px;
   left: -30px;
   padding: 10px;
   position: absolute;
   transform: rotate(135deg) translateY(-50%);
+  top: -10%;
   transition: left 0.15s ease-in-out;
   width: 5px;
 }
@@ -140,6 +156,7 @@ body{
 
 .gallery-controls-next{
   position: relative;
+  right: 50px
 }
 
 .gallery-controls-next::before{
@@ -186,10 +203,55 @@ body{
 .top-box {
   width: 100%;
   height: 100px;
-  background-color: #ffb428;
+  background-color: rgb(161, 76, 23);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.menu-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  width: 100%;            
+  justify-content: center;
+  margin-top: 20px;       
+}
+
+@media (min-width: 768px) {
+  .menu-section {
+    grid-template-columns: repeat(3, 512px); 
+    justify-content: center;
+  }
+}
+
+.menu-item {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fdefd5;
+  align-items: center;
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: white;
+}
+
+.slide-text h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.slide-text p {
+  margin: 5px 0 0;
+  font-size: 14px;
 }
