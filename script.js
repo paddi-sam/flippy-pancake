@@ -50,9 +50,23 @@ class Carousel {
       });
     });
   }
-}
+
+  useKeyboard() {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      const prevButton = document.querySelector('.gallery-controls-previous');
+      this.setCurrentState(prevButton);
+    }
+
+    if (e.key === 'ArrowRight') {
+      const nextButton = document.querySelector('.gallery-controls-next');
+      this.setCurrentState(nextButton);
+    }
+  });
+}}
 
 const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
 
 exampleCarousel.setControls();
 exampleCarousel.useControls();
+exampleCarousel.useKeyboard();
