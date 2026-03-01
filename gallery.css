@@ -60,6 +60,20 @@
   background-color: black
 }
 
+.gallery-item-3 .add-basket-button-container{
+  display:block
+}
+
+.gallery-item-3 .add-basket-button-container .add-button{
+  font-weight: bolder;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+}
+
 .gallery-item-3 img{
   height: 420px;
 }

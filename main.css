@@ -69,7 +69,6 @@ body{
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-
   width: 100%;            
   justify-content: center;
   margin-top: 20px;       
@@ -108,4 +107,18 @@ body{
 .slide-text p {
   margin: 5px 0 0;
   font-size: 14px;
+}
+
+.add-basket-button-container{
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  padding: 15px;
+  background: linear-gradient(to bottom, rgb(149, 43, 175), rgb(40, 26, 97));
+  border-radius: 5px;  
+  margin-bottom: 5px;
+  right: 15px;
+  display: none;
+  cursor: pointer
 }
