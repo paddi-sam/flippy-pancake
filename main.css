@@ -1,4 +1,5 @@
 @import url("gallery.css");
+@import url("build-stack.css");
 
 html, body {
   margin: 0;
@@ -121,4 +122,28 @@ body{
   right: 15px;
   display: none;
   cursor: pointer
+}
+
+.byos-container {
+  position: relative;
+  width: 1200px;
+  height: 500px;
+  background: linear-gradient(to right, #ffffff, #b5b5b5);
+  align-items: center;
+  border-radius: 25px;
+  margin: auto;
+  margin-top: 250px;
+}
+
+.byos-container .byos-image{
+  border-radius: 25px;
+  width: 700px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.byos-container .byos-text-container{
+  position: absolute;
+  left: 700px;
+  top: 0px
 }
