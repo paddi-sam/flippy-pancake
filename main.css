@@ -125,25 +125,49 @@ body{
 }
 
 .byos-container {
-  position: relative;
+  display: flex;             
+  flex-direction: row;       
+  align-items: center;       
+  justify-content: center;   
   width: 1200px;
   height: 500px;
   background: linear-gradient(to right, #ffffff, #b5b5b5);
-  align-items: center;
   border-radius: 25px;
   margin: auto;
   margin-top: 250px;
+  position: relative;      
+  overflow: hidden;          
 }
 
-.byos-container .byos-image{
+.byos-container .byos-image {
   border-radius: 25px;
   width: 700px;
-  height: 500px;
+  height: 100%;
   object-fit: cover;
 }
 
-.byos-container .byos-text-container{
-  position: absolute;
-  left: 700px;
-  top: 0px
+
+.byos-container .byos-text-container {
+  width: 500px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.byos-container .t1 {
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bolder;
+  font-family: fantasy;
+}
+
+.byos-container .t2{
+  margin-top: 50px;
+  font-size: x-large;
+  font-family: fantasy;
+  font-weight: 500;
 }
