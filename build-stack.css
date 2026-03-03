@@ -12,7 +12,8 @@
   margin: auto;
   margin-top: 250px;
   position: relative;      
-  overflow: hidden;          
+  overflow: hidden;    
+  margin-bottom: 200px;      
 }
 
 .byos-container .byos-image {

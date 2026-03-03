@@ -229,3 +229,6 @@
   font-size: 14px;
 }
 
+#gallery {
+  scroll-margin-top: 120px; 
+}
