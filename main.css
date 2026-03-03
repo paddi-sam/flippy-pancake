@@ -1,5 +1,6 @@
 @import url("gallery.css");
 @import url("build-stack.css");
+@import url("top-elements.css");
 
 html, body {
   margin: 0;
@@ -23,7 +24,7 @@ h2 {
 
 body{
   margin: 0;
-  padding: 0;
+  padding-top: 150px;
   width: 100%;
   flex-direction: row;
   align-items: center;
@@ -33,93 +34,3 @@ body{
   
 }
 
-.top-box {
-  width: 100%;
-  height: 100px;
-  background-color: rgb(161, 76, 23);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.top-row {
-  width: 100%;
-  height: 50px;
-  background-color: rgb(161, 76, 23);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.top-row-text{
-  align-items: center;
-  color: #ffffff;
-  font-weight: bolder;
-  margin-left: 25px;
-  margin-right: 25px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-}
-
-.menu-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  width: 100%;            
-  justify-content: center;
-  margin-top: 20px;       
-}
-
-@media (min-width: 768px) {
-  .menu-section {
-    grid-template-columns: repeat(3, 512px); 
-    justify-content: center;
-  }
-}
-
-.menu-item {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #fdefd5;
-  align-items: center;
-}
-
-.slide-text {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-  color: white;
-}
-
-.slide-text h3 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.slide-text p {
-  margin: 5px 0 0;
-  font-size: 14px;
-}
-
-.add-basket-button-container{
-  position: absolute;
-  bottom: 0;
-  width: 40px;
-  height: 40px;
-  padding: 15px;
-  background: linear-gradient(to bottom, rgb(149, 43, 175), rgb(40, 26, 97));
-  border-radius: 5px;  
-  margin-bottom: 5px;
-  right: 15px;
-  display: none;
-  cursor: pointer
-}

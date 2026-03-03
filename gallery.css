@@ -181,3 +181,51 @@
 .gallery-nav li.gallery-item-selected{
   background: #555;
 }
+
+.add-basket-button-container{
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  padding: 15px;
+  background: linear-gradient(to bottom, rgb(149, 43, 175), rgb(40, 26, 97));
+  border-radius: 5px;  
+  margin-bottom: 5px;
+  right: 15px;
+  display: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out 
+}
+
+.add-basket-button-container:hover{
+  transform: scale(1.05);
+}
+
+.menu-item {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fdefd5;
+  align-items: center;
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: white;
+}
+
+.slide-text h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.slide-text p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
