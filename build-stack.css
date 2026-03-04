@@ -7,13 +7,14 @@
   justify-content: center;   
   width: 1200px;
   height: 500px;
-  background: linear-gradient(to right, #ffffff, #b5b5b5);
+  background: linear-gradient(to bottom, #ffc885, #a78234);
   border-radius: 25px;
   margin: auto;
   margin-top: 250px;
   position: relative;      
   overflow: hidden;    
-  margin-bottom: 200px;      
+  margin-bottom: 200px;   
+  scroll-margin-top: 200px   
 }
 
 .byos-container .byos-image {
