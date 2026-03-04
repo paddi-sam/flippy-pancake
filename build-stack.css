@@ -73,10 +73,14 @@
   border-color: white;
   border-style: solid;
   background-color: transparent;
-  transition: background-color 0.5s ease;
+  transition: background-color, 0.5s ease;
   border-width: 3px;
 }
 
 .get-started-button-container:hover {
   background-color: plum;
+}
+
+.get-started-button-container:active{
+  transform: scale(0.9);
 }

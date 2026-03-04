@@ -201,6 +201,10 @@
   transform: scale(1.05);
 }
 
+.add-basket-button-container:active{
+  transform: scale(0.95);
+}
+
 .menu-item {
   display: grid;
   grid-template-rows: auto 1fr;
