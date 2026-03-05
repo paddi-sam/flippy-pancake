@@ -37,3 +37,19 @@
 .top-links-item:hover{
     text-decoration: underline;
 }
+
+.account-container{
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  right: 20px;
+}
+
+.account-container img{
+  max-width: 100px;
+  height: auto;
+}
+
+.account-container img:hover{
+  cursor: pointer;
+}
