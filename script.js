@@ -77,7 +77,7 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('show');
-      observer.unobserve(entry.target); // remove if you only want it once
+      observer.unobserve(entry.target);
     }
   });
 }, {
@@ -85,3 +85,10 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 elements.forEach(el => observer.observe(el));
+
+const button = document.getElementById("account-button");
+const menu = document.querySelector(".account-drop-down");
+
+button.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
