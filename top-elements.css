@@ -39,17 +39,32 @@
 }
 
 .account-container{
-  width: 200px;
-  height: 100px;
+  width: 300px;
   position: absolute;
   right: 20px;
+  top: 50px;
+  border-style: dashed;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .account-container img{
-  max-width: 100px;
+  width: 100px;
   height: auto;
+  align-items: center;
+  cursor: pointer;
 }
 
-.account-container img:hover{
-  cursor: pointer;
+.account-drop-down {
+  display: none;
+  width: 300px;
+  height: 380px;
+  margin-top: 20px;
+  background-color: rgb(218, 218, 218);
+}
+
+.account-drop-down.active{
+  display: block;
 }
