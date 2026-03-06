@@ -64,14 +64,19 @@
 }
 
 .account-drop-down {
-  display: none;
   width: 300px;
   height: 380px;
   margin-top: 20px;
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+  transition: all 0.4s ease;
 }
 
-.account-drop-down.active{
-  display: block;
+.account-drop-down.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .drop-down-element{
@@ -98,4 +103,15 @@
   font-family: fantasy;
   font-weight: bolder;
   color: white;
+}
+
+.slide-down {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.2s ease-out;
+}
+
+.slide-down.show {
+  opacity: 1;
+  transform: translateY(0);
 }

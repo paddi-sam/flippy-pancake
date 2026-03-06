@@ -92,3 +92,10 @@ const menu = document.querySelector(".account-drop-down");
 button.addEventListener("click", () => {
   menu.classList.toggle("active");
 });
+
+const acc_button = document.getElementById("account-button");
+const dropdown = document.querySelector(".account-drop-down");
+
+acc_button.addEventListener("click", () => {
+  dropdown.classList.toggle("show");
+});
