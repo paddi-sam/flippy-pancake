@@ -1,8 +1,8 @@
 <html>
   <head>
-    <link rel="icon" type="image/x-icon" href="assets/app-ico.png">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/app-ico.png') }}">
     <title>Flippy pancakes</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
   <body>
 
@@ -13,8 +13,8 @@
       <div class="account-container">
       
         <div class="account-icons" id="account-button">
-          <img src="assets/burger-menu-icon.png">
-          <img src="assets/account-pfp.png">
+          <img src="{{ url_for('static', filename='images/burger-menu-icon.png') }}">
+          <img src="{{ url_for('static', filename='images/account-pfp.png') }}">
         </div>
       
         <div class="account-drop-down slide-down">
@@ -36,7 +36,7 @@
     
     <div class="gallery-container" id = "gallery">
       <div class="gallery-item gallery-item-1" data-index="1">
-        <img src="assets/berries-cream.jpg">
+        <img src="{{ url_for('static', filename='images/berries-cream.jpg') }}">
         <div class="slide-text">
           <h3>Berries & Cream</h3>
           <p>Fresh forest berries with whipped cream</p>
@@ -48,7 +48,7 @@
       </div>
 
       <div class="gallery-item gallery-item-2" data-index="2">
-        <img src="assets/chocolate-pancakes.jpg">
+        <img src="{{ url_for('static', filename='images/Chocolate-pancakes.jpg') }}">
         <div class="slide-text">
           <h3>Chocolate Stack</h3>
           <p>Cocoa pancakes with chocolatey sauce</p>
@@ -60,7 +60,7 @@
       </div>
     
       <div class="gallery-item gallery-item-3" data-index="3">
-        <img src="assets/lemon-pancakes.jpg">
+        <img src="{{ url_for('static', filename='images/lemon-pancakes.jpg') }}">
         <div class="slide-text">
           <h3>Lemon and syrup</h3>
           <p>Delicious blend of sour and sweet</p>
@@ -72,7 +72,7 @@
       </div>
 
       <div class="gallery-item gallery-item-4" data-index="4">
-        <img src="assets/strawberry-pancakes.jpg">
+        <img src="{{ url_for('static', filename='images/strawberry-pancakes.jpg') }}">
         <div class="slide-text">
           <h3>Strawberrys n' Sauce</h3>
           <p>all the strawberries you could want</p>
@@ -84,7 +84,7 @@
       </div>
     
       <div class="gallery-item gallery-item-5" data-index="5">
-        <img src="assets/glutenfree-stack.jpg">
+        <img src="{{ url_for('static', filename='images/glutenfree-stack.jpg') }}">
         <div class="slide-text">
           <h3>Gluten free</h3>
           <p>So noone feels left out</p>
@@ -100,7 +100,7 @@
     <div class="byos-container" id ="build-stack">
 
 
-      <img src="assets/build-your-own-stack.jpg" class="byos-image" alt="Build your own stack">
+      <img src="{{ url_for('static', filename='images/build-your-own-stack.jpg') }}" class="byos-image" alt="Build your own stack">
       <div class="byos-text-container">
         <div class="t1">Build Your Own Stack</div>
         <div class="t2">Customise your own pancake meal with items like: </div>
@@ -124,7 +124,7 @@
           <div class="wcu1">-</div>
           <div class="wcu1">We use premium ingredients to make every pancake perfect.</div>
         </div>
-        <img src="assets/ingredients.jpg">
+        <img src="{{ url_for('static', filename='images/ingredients.jpg') }}">
       </div>
       <div class = "why-choose-us-img-container">
         <div class ="why-choose-us-text">
@@ -132,7 +132,7 @@
           <div class="wcu1">-</div>
           <div class="wcu1">All meals are made in house everyday by trained chefs.</div>
         </div>
-        <img src="assets/cooked.jpg">
+        <img src="{{ url_for('static', filename='images/cooked.jpg') }}">
       </div>
       <div class = "why-choose-us-img-container">
         <div class ="why-choose-us-text">
@@ -140,9 +140,9 @@
           <div class="wcu1">-</div>
           <div class="wcu1">Each recipe has been hand crafted and carefully tested.</div>
         </div>
-        <img src="assets/premium.jpg">
+        <img src="{{ url_for('static', filename='images/premium.jpg') }}">
     </div>
     
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>
