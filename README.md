@@ -1,6 +1,6 @@
 ## To run
 
-install live server extension on vscode and right click index.html and click open with live server.
+Requires python and Flask to be installed, run app.py and ctrl+click on the localhost link in the terminal
 
 ## Asset Disclaimer
 
