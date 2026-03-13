@@ -9,15 +9,16 @@
 </head>
 <body>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="/static/css/login.css">
     <!-- <h1>Flippy Pancakes Staff Login</h1> -->
 
-    {% with messages = get_flashed_messages() %}
+    <!-- {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
                 <div class="flash-message">{{ message }}</div>
             {% endfor %}
         {% endif %}
-    {% endwith %}
+    {% endwith %} -->
 
     <!-- <form method="post" action="/login">
         <label for="username">username:</label>
@@ -39,6 +40,18 @@
             
             <button type="submit">Login</button>
         </form>
+        <div class="username-container">            
+            <div class="login-text">Username</div>
+        </div>
+        <div class="username-container">
+
+            <div class="login-text">Password</div>
+        </div>
+
+        <button class="login-button" type="submit">
+            <div class="login-button-text">Login</div>
+        </button>
     </div>
+    
 </body>
 </html>

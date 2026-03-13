@@ -11,10 +11,11 @@ body{
     width: 45%;
     height: 700px;
     border-color: black;
-    justify-content: center;
     align-items: center;
     border-radius: 50px;
     background-color: beige;
+    display: flex;
+    flex-direction: column;
 }
 
 .title{
@@ -22,4 +23,58 @@ body{
     font-size: 62px;
     margin-top: 25px;
     font-family: fantasy;
+}
+
+.username-container{
+    width: 50%;
+    height: 65px;
+    border-style: solid;
+    border-radius: 50px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 100px;
+}
+
+.username-container:hover{
+    cursor: text;
+    background-color: white;
+    transform: scale(1.03);
+    border-color: gray;
+    border-width: 1px;
+}
+
+.login-text{
+    color: gray;
+    margin-top: 18px;
+    font-size: x-large;
+    opacity: 0.8;
+}
+
+.login-text:active{
+    color: transparent
+}
+
+.login-button{
+    background-color: transparent;
+    width: 25%;
+    height: 50px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50px;
+    margin-top: 100px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-button:hover{
+    cursor: pointer;
+    background-color: rgb(246, 179, 254);
+    transform: scale(1.1);
+    border-color: gray;
+    border-width: 0px;
+}
+
+.login-button-text{
+    color: rgb(0, 0, 0);
+    font-size: large;
+    font-weight: bolder;
 }
