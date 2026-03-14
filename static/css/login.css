@@ -1,6 +1,7 @@
 body{
     background-color: #ffe1a8;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -22,7 +23,6 @@ body{
     font-weight: bold;
     font-size: 62px;
     margin-top: 25px;
-    font-family: fantasy;
     margin-bottom: 100px;
 }
 
@@ -100,4 +100,27 @@ body{
     font-size: large;
     border-color: black;
 
+}
+
+.back-to-home-container{
+    width:500px;
+    height:100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;       
+    text-decoration: none;
+    color: inherit;  
+}
+
+.back-to-home-container:hover{
+    cursor:pointer
+}
+
+.bth-text{
+    font-weight: lighter;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
 }
