@@ -18,8 +18,20 @@
         </div>
       
         <div class="account-drop-down slide-down">
-          <div class="drop-down-element"><div class="acctext"><a href="{{ url_for('login') }}">Login</a></div></div>
-          <div class="drop-down-element"><div class="acctext"><a href="{{ url_for('register') }}">Register</a></div></div>
+          <a href="{{ url_for('login') }}">
+          <div class="drop-down-element">
+              <div class="acctext">
+              Login
+              </div>
+          </div>
+          </a>  
+          <a href="{{ url_for('register') }}">
+          <div class="drop-down-element">
+              <div class="acctext">
+              Register
+              </div>
+          </div>
+          </a>
           <div class="drop-down-element"><div class="acctext">Orders</div></div>
           <div class="drop-down-element"><div class="acctext">Logout</div></div>
         </div>
