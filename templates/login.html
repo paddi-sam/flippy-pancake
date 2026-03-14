@@ -31,26 +31,24 @@
     </form> -->
     <div class="login-container">
         <div class="title">Flippy Pancakes Login</div>
-            <form method="post" action="/login">
-            <label for="username">username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Login</button>
+    
+        <form method="post" action="/login">
+        
+            <label class="username-container">
+                <input type="text" name="username" required>
+                <div class="login-text">Username</div>
+            </label>
+        
+            <div class="username-container">
+                <input type="password" name="password" required>
+                <div class="login-text">Password</div>
+            </div>
+        
+            <button class="login-button" type="submit">
+                <div class="login-button-text">Login</div>
+            </button>
+        
         </form>
-        <div class="username-container">            
-            <div class="login-text">Username</div>
-        </div>
-        <div class="username-container">
-
-            <div class="login-text">Password</div>
-        </div>
-
-        <button class="login-button" type="submit">
-            <div class="login-button-text">Login</div>
-        </button>
     </div>
     
 </body>

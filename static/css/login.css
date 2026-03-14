@@ -19,21 +19,45 @@ body{
 }
 
 .title{
-    font-weight: bolder;
+    font-weight: bold;
     font-size: 62px;
     margin-top: 25px;
     font-family: fantasy;
+    margin-bottom: 100px;
 }
 
-.username-container{
-    width: 50%;
+.username-container {
+    position: relative;
+    width: 400px;
     height: 65px;
-    border-style: solid;
-    border-radius: 50px;
-    background-color: transparent;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 100px;
 }
+
+.username-container input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    padding: 0 12px;
+}
+
+.login-text {
+    position: absolute;
+    left: 12px;
+    top: -10px;
+    background: white;
+    padding: 0 5px;
+    font-size: 12px;
+}
+
 
 .username-container:hover{
     cursor: text;
@@ -45,17 +69,15 @@ body{
 
 .login-text{
     color: gray;
-    margin-top: 18px;
-    font-size: x-large;
+    margin-top: -7px;
+    font-size: medium;
     opacity: 0.8;
-}
-
-.login-text:active{
-    color: transparent
+    background-color: transparent;
 }
 
 .login-button{
     background-color: transparent;
+    margin-bottom: 10px;
     width: 25%;
     height: 50px;
     border-style: solid;
@@ -76,5 +98,6 @@ body{
 .login-button-text{
     color: rgb(0, 0, 0);
     font-size: large;
-    font-weight: bolder;
+    border-color: black;
+
 }
