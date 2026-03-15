@@ -6,7 +6,9 @@
     <title>Register</title>
 </head>
 <body>
-    <form method="POST" action="/register">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
+
+    <!-- <form method="POST" action="/register">
 
         <label>Username:</label>
         <input type="text" name="username" required>
@@ -19,6 +21,33 @@
 
         <button type="submit">Register</button>
 
-    </form>
+    </form> -->
+
+    <div class="login-container">
+        <div class="title">Flippy Pancakes Register</div>
+    
+        <form method="post" action="/login">
+        
+            <label class="username-container">
+                <input type="text" name="username" required>
+                <div class="login-text">Username</div>
+            </label>
+        
+            <div class="username-container">
+                <input type="password" name="password" required>
+                <div class="login-text">Password</div>
+            </div>
+
+            <div class="username-container">
+                <input type="password" name="confirm_password" required>
+                <div class="login-text">Confirm Password</div>
+            </div>
+        
+            <button class="login-button" type="submit">
+                <div class="login-button-text">Login</div>
+            </button>
+        
+        </form>
+    </div>
 </body>
 </html>
