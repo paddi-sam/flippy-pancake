@@ -27,7 +27,8 @@ def login():
             return redirect(url_for('index'))
         else:
             flash('Invalid username or password')
-            
+            return render_template('login.html')
+    
     return render_template('login.html')
 
 @app.route('/register')

@@ -8,26 +8,14 @@
 </head>
 <body>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
-    <link rel="stylesheet" href="/static/css/login.css">
-    <!-- <h1>Flippy Pancakes Staff Login</h1> -->
 
-    <!-- {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
                 <div class="flash-message">{{ message }}</div>
             {% endfor %}
         {% endif %}
-    {% endwith %} -->
-
-    <!-- <form method="post" action="/login">
-        <label for="username">username:</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="password">password:</label>
-        <input type="password" id="password" name="password" required>
-       
-        <button type="submit">Login</button>
-    </form> -->
+    {% endwith %}
 
     <a href="{{ url_for('index') }}" class="back-to-home-container">
         <img src="{{ url_for('static', filename='images/arrow-left.png') }}">
