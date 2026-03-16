@@ -8,8 +8,26 @@ app.secret_key = 'your-secret-key-here'
 def index():
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        connection = sqlite3.connect('users.db')
+        cursor = connection.cursor()
+        cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+        row = cursor.fetchone()
+        connection.close()
+
+        if row and row[0] == password:
+            session['username'] = username
+            flash(f'Welcome back, {username}!')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password')
+            
     return render_template('login.html')
 
 @app.route('/register')
