@@ -17,6 +17,7 @@ body{
     background-color: beige;
     display: flex;
     flex-direction: column;
+    position: fixed;
 }
 
 .title{
@@ -123,4 +124,21 @@ body{
     font-size: 50px;
     display: flex;
     align-items: center;
+}
+
+.flash-message-container{
+    position: fixed;
+    width:60%;
+    height:50px;
+    margin-bottom: 1000px;
+    border-radius: 10px;
+    background-color: rgb(255, 89, 89);
+}
+
+.flash-message{
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
 }
