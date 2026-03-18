@@ -2,6 +2,10 @@
 
 Requires python and Flask to be installed, run app.py and ctrl+click on the localhost link in the terminal
 
+## Database
+
+To interact with user login and register features, first [Initialise Database](init-db.py) and run it, then run [App.py](app.py) and navigate to login and register features and they should work
+
 ## Asset Disclaimer
 
 Some image assets used in this project are not owned by me. 
