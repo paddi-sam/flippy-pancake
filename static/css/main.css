@@ -100,3 +100,25 @@ body{
   font-weight: 500;
   color: white;
 }
+
+.flash-message-welcome {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #91ff89;
+  width: 25%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000;
+  color: black;
+  border-radius: 8px;
+}
+
+.flash-message-welcome-text{
+  color: black;
+  font-weight: bold;
+  font-size: xx-large
+}

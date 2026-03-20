@@ -8,9 +8,9 @@
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <div class="flash-messages">
+        <div class="flash-message-welcome">
           {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
+            {{ message }}
           {% endfor %}
         </div>
       {% endif %}
