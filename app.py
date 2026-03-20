@@ -31,8 +31,40 @@ def login():
     
     return render_template('login.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+
+        print("Registering:", username, password, confirm_password)  
+
+        if not username or not password or not confirm_password:
+            flash('All fields are required!')
+            return render_template('register.html')
+
+        if password != confirm_password:
+            flash('Passwords do not match!')
+            return render_template('register.html')
+        
+        connection = sqlite3.connect('users.db')
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            connection.close()
+            flash('Username already taken!')
+            return render_template('register.html')
+        
+        cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
+        connection.commit()
+        connection.close()
+
+        flash(f'Registration successful! Welcome, {username}!')
+        return redirect(url_for('login'))
+
     return render_template('register.html')
 
 if __name__ == '__main__':
