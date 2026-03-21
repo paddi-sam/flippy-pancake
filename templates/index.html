@@ -16,6 +16,7 @@
       {% endif %}
     {% endwith %}
 
+
     <div class="top-box">
       <h1>Flippy Pancake</h1>
       <h2><i>Making pancakes since 1995</i></h2> 
@@ -28,22 +29,41 @@
         </div>
       
         <div class="account-drop-down slide-down">
-          <a href="{{ url_for('login') }}">
-          <div class="drop-down-element">
-              <div class="acctext">
-              Login
+        
+          {% if session.get('username') %}
+
+            <div class="drop-down-element">
+                <div class="acctext">
+                    Logged in as {{ session['username'] }}
+                </div>
+            </div>
+          
+            <div class="drop-down-element">
+                <div class="acctext">Orders</div>
+            </div>
+          
+            <a href="{{ url_for('logout') }}">
+              <div class="drop-down-element">
+                  <div class="acctext">Logout</div>
               </div>
-          </div>
-          </a>  
-          <a href="{{ url_for('register') }}">
-          <div class="drop-down-element">
-              <div class="acctext">
-              Register
+            </a>
+          
+          {% else %}
+          
+            <a href="{{ url_for('login') }}">
+              <div class="drop-down-element">
+                  <div class="acctext">Login</div>
               </div>
-          </div>
-          </a>
-          <div class="drop-down-element"><div class="acctext">Orders</div></div>
-          <div class="drop-down-element"><div class="acctext">Logout</div></div>
+            </a>  
+          
+            <a href="{{ url_for('register') }}">
+              <div class="drop-down-element">
+                  <div class="acctext">Register</div>
+              </div>
+            </a>
+          
+          {% endif %}
+          
         </div>
       
       </div>
