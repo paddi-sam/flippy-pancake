@@ -139,3 +139,18 @@ body{
     align-items: center;
     font-size: xx-large;
 }
+
+.bg-image {
+  position: fixed;
+  inset: 0;
+  background: url("/static/images/login.jpg") center/cover no-repeat;
+  z-index: 0;
+}
+
+.bg-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.3);
+}
