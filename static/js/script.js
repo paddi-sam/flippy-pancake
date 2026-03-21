@@ -99,3 +99,13 @@ const dropdown = document.querySelector(".account-drop-down");
 acc_button.addEventListener("click", () => {
   dropdown.classList.toggle("show");
 });
+
+setTimeout(() => {
+  document.querySelectorAll('.flash-message-welcome').forEach(el => {
+    el.classList.add('fade-out');
+
+    setTimeout(() => {
+      el.remove();
+    }, 500);
+  });
+}, 3000);
