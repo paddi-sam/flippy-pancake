@@ -116,12 +116,6 @@ body{
   border-radius: 8px;
 }
 
-.flash-message-welcome-text{
-  color: black;
-  font-weight: bold;
-  font-size: xx-large
-}
-
 .fade-out {
   opacity: 0;
   transition: opacity 0.5s ease;

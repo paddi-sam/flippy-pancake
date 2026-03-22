@@ -14,12 +14,6 @@
   z-index: 1000;
 }
 
-.top-box .top-row-text {
-  color: #ffffff;
-  font-weight: bolder;
-  cursor: pointer;
-}
-
 .top-links{
   display: flex;          
   flex-direction: row;    
