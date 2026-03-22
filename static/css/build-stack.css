@@ -79,3 +79,7 @@ background-color: plum;
 .get-started-button-container:active{
 transform: scale(0.9);
 }
+
+.byos-text-container > a {
+  display: contents;
+}
