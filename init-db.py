@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('users.db')
+conn = sqlite3.connect('DB.db')
 cursor = conn.cursor()
 
 
@@ -18,8 +18,30 @@ try:
     cursor.execute('INSERT INTO users (username, password) VALUES (?,?)',
                    ('staff', 'flippy2024'))
 
+except sqlite3.IntegrityError:
+    pass
 
 
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS items (
+        item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        price REAL NOT NULL
+    )
+''')
+
+try:
+    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
+                   (1, 'Berries & Cream', 5.49))
+    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
+                   (2, 'Chocolate Stack', 6.99))
+    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
+                   (3, 'Lemon and syrup', 6.49))
+    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
+                   (4, 'Strawberry and sauce', 7.49))
+    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
+                   (5, 'Gluten free', 6.49))
+    
 except sqlite3.IntegrityError:
     pass
 
