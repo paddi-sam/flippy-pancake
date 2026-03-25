@@ -15,7 +15,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        connection = sqlite3.connect('users.db')
+        connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
         cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
         row = cursor.fetchone()
@@ -48,7 +48,7 @@ def register():
             flash('Passwords do not match!')
             return render_template('register.html')
         
-        connection = sqlite3.connect('users.db')
+        connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
         existing_user = cursor.fetchone()
@@ -72,6 +72,10 @@ def logout():
     session.pop('username', None)
     flash('You have been logged out.')
     return redirect(url_for('index'))
+
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
