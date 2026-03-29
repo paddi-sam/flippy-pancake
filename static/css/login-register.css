@@ -10,7 +10,7 @@ body{
 
 .login-container{
     width: 35%;
-    height: 650px;
+    height: auto;
     border-color: black;
     align-items: center;
     background-color: beige;
@@ -28,8 +28,8 @@ body{
 
 .username-container {
     position: relative;
-    width: 400px;
-    height: 65px;
+    width: 100%;
+    height: 50px;
     border: 2px solid #ccc;
     border-radius: 10px;
     margin: 10px 0;
