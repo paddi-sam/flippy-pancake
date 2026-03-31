@@ -12,16 +12,6 @@ cursor.execute('''
     )
 ''')
 
-try:
-    cursor.execute('INSERT INTO users (username, password) VALUES (?,?)',
-                   ('admin', 'password123'))
-    cursor.execute('INSERT INTO users (username, password) VALUES (?,?)',
-                   ('staff', 'flippy2024'))
-
-except sqlite3.IntegrityError:
-    pass
-
-
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS items (
         item_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,6 +32,23 @@ try:
     cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
                    (5, 'Gluten free', 6.49))
     
+except sqlite3.IntegrityError:
+    pass
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS staff (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+    )
+''')
+
+try:
+    cursor.execute('INSERT INTO staff (username, password) VALUES (?,?)',
+                   ('admin', 'password123'))
+    cursor.execute('INSERT INTO staff (username, password) VALUES (?,?)',
+                   ('staff', 'flippy2024'))
+
 except sqlite3.IntegrityError:
     pass
 
