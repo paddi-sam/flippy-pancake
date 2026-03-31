@@ -67,6 +67,29 @@ def register():
 
     return render_template('register.html')
 
+@app.route('/staff-login', methods=['GET', 'POST'])
+def stafflogin():
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        connection = sqlite3.connect('DB.db')
+        cursor = connection.cursor()
+        cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+        row = cursor.fetchone()
+        connection.close()
+
+        if row and row[0] == password:
+            session['username'] = username
+            flash(f'Welcome back, {username}!')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password')
+            return render_template('login.html')
+    
+    return render_template('staff-login.html')
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
