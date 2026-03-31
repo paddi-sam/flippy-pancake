@@ -76,7 +76,7 @@ def stafflogin():
 
         connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
-        cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+        cursor.execute('SELECT password FROM staff WHERE username = ?', (username,))
         row = cursor.fetchone()
         connection.close()
 
