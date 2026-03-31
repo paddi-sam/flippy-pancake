@@ -8,6 +8,16 @@
 <body>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message-container">
+                    <div class="flash-message">{{ message }}</div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <!-- <form method="POST" action="/register">
 
         <label>Username:</label>

@@ -125,11 +125,13 @@ body{
 
 .flash-message-container{
     position: fixed;
-    width:60%;
+    width:40%;
     height:50px;
-    margin-bottom: 1000px;
+    margin-top: 5%;
+    top: 0;
     border-radius: 10px;
     background-color: rgb(255, 89, 89);
+    z-index: 10000;
 }
 
 .flash-message{
