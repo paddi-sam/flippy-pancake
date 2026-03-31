@@ -48,6 +48,27 @@ def register():
             flash('Passwords do not match!')
             return render_template('register.html')
         
+        if len(password) < 8:
+            flash("Password too short!")
+            return render_template('register.html')
+
+        num_count = 0     
+        for i in password:
+            if i.isdigit() == True:
+                num_count += 1
+        if num_count < 3:
+            flash("Password needs to have 3 numbers!")
+            return render_template('register.html')
+        
+        special_chars = set("!@#$%^&*()-_=+[]{};:'\",.<>/?\\|")
+        special_count = 0
+        for i in password:
+            if i in special_chars:
+                special_count += 1
+        if special_count < 1:
+            flash("Password must contain a special charecter")
+            return render_template('register.html')
+        
         connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
