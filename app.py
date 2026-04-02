@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 import sqlite3
+import hashlib
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
@@ -21,7 +22,8 @@ def login():
         row = cursor.fetchone()
         connection.close()
 
-        if row and row[0] == password:
+        hashed_input = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        if row and row[0] == hashed_input:
             session['username'] = username
             flash(f'Welcome back, {username}!')
             return redirect(url_for('index'))
@@ -66,7 +68,7 @@ def register():
             if i in special_chars:
                 special_count += 1
         if special_count < 1:
-            flash("Password must contain a special charecter")
+            flash("Password must contain a special character")
             return render_template('register.html')
         
         connection = sqlite3.connect('DB.db')
@@ -79,7 +81,9 @@ def register():
             flash('Username already taken!')
             return render_template('register.html')
         
-        cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
+
+        hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
         connection.commit()
         connection.close()
 
@@ -101,7 +105,8 @@ def stafflogin():
         row = cursor.fetchone()
         connection.close()
 
-        if row and row[0] == password:
+        hashed_input = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        if row and row[0] == hashed_input:
             session['username'] = username
             flash(f'Welcome back, {username}!')
             return redirect(url_for('index'))
