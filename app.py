@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 import sqlite3
-import hashlib
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
+
+ph=PasswordHasher()
 
 @app.route('/')
 def index():
@@ -22,8 +25,14 @@ def login():
         row = cursor.fetchone()
         connection.close()
 
-        hashed_input = hashlib.sha256(password.encode('utf-8')).hexdigest()
-        if row and row[0] == hashed_input:
+        valid_password = False
+        if row:
+            try:
+                valid_password = ph.verify(row[0], password)
+            except VerifyMismatchError:
+                valid_password = False
+
+        if valid_password:
             session['username'] = username
             session['staff'] = False
             flash(f'Welcome back, {username}!')
@@ -40,8 +49,6 @@ def register():
         username = request.form.get('username')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
-
-        print("Registering:", username, password, confirm_password)  
 
         if not username or not password or not confirm_password:
             flash('All fields are required!')
@@ -82,8 +89,7 @@ def register():
             flash('Username already taken!')
             return render_template('register.html')
         
-
-        hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        hashed_password = ph.hash(password)
         cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
         connection.commit()
         connection.close()
@@ -106,8 +112,14 @@ def stafflogin():
         row = cursor.fetchone()
         connection.close()
 
-        hashed_input = hashlib.sha256(password.encode('utf-8')).hexdigest()
-        if row and row[0] == hashed_input:
+        valid_password = False
+        if row:
+            try:
+                valid_password = ph.verify(row[0], password)
+            except VerifyMismatchError:
+                valid_password = False
+
+        if valid_password:
             session['username'] = username
             session['staff'] = True
             session['staff-username'] = username

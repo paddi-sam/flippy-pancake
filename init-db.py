@@ -1,5 +1,7 @@
 import sqlite3
-import hashlib
+from argon2 import PasswordHasher
+
+ph=PasswordHasher()
 
 print(r"""
   ______ _ _                         _         __  __       _       _        _                    
@@ -61,7 +63,7 @@ def staff_pass():
 valid_user = staff_username()
 valid_pass = staff_pass()
 
-hashed_staff_password = hashlib.sha256(valid_pass.encode('utf-8')).hexdigest()
+hashed_staff_password = ph.hash(valid_pass)
 
 try:
     cursor.execute('INSERT INTO staff (username, password) VALUES (?,?)',
