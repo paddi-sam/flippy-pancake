@@ -133,7 +133,11 @@ def menu():
 
 @app.route('/staffmenu')
 def staff_menu():
-    return render_template('staff-menu.html')
+    if not session.get('staff'):
+        flash("You need to be staff to see this")
+        return redirect(url_for('stafflogin'))
+    else:
+        return render_template('staff-menu.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
