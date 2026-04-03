@@ -25,6 +25,7 @@ def login():
         hashed_input = hashlib.sha256(password.encode('utf-8')).hexdigest()
         if row and row[0] == hashed_input:
             session['username'] = username
+            session['staff'] = False
             flash(f'Welcome back, {username}!')
             return redirect(url_for('index'))
         else:
@@ -108,6 +109,8 @@ def stafflogin():
         hashed_input = hashlib.sha256(password.encode('utf-8')).hexdigest()
         if row and row[0] == hashed_input:
             session['username'] = username
+            session['staff'] = True
+            session['staff-username'] = username
             flash(f'Welcome back, {username}!')
             return redirect(url_for('index'))
         else:
@@ -119,12 +122,18 @@ def stafflogin():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
+    session.pop('staff', None)
+    session.pop('staff-username', None)
     flash('You have been logged out.')
     return redirect(url_for('index'))
 
 @app.route('/menu')
 def menu():
     return render_template('menu.html')
+
+@app.route('/staffmenu')
+def staff_menu():
+    return render_template('staff-menu.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

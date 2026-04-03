@@ -29,7 +29,23 @@
       
         <div class="account-drop-down slide-down">
         
-          {% if session.get('username') %}
+          {% if session.get('staff') %}
+            <div class="drop-down-element">
+                <div class="acctext">
+                    Logged in as: {{ session['staff-username'] }}
+                </div>
+            </div>
+            <a href="{{ url_for('staff_menu') }}">
+              <div class="drop-down-element">
+                  <div class="acctext">Staff Menu</div>
+              </div>
+            </a>
+            <a href="{{ url_for('logout') }}">
+              <div class="drop-down-element">
+                  <div class="acctext">Logout</div>
+              </div>
+            </a>
+          {% elif session.get('username') %}
 
             <div class="drop-down-element">
                 <div class="acctext">
@@ -46,9 +62,7 @@
                   <div class="acctext">Logout</div>
               </div>
             </a>
-          
           {% else %}
-          
             <a href="{{ url_for('login') }}">
               <div class="drop-down-element">
                   <div class="acctext">Login</div>
@@ -66,7 +80,6 @@
                   <div class="acctext">Register</div>
               </div>
             </a>
-          
           {% endif %}
           
         </div>
@@ -144,13 +157,11 @@
     </div>
     <div class="gallery-controls"></div>
 
-    <div class ="more-products-container">
       <a href="{{ url_for('menu') }}">
-        <div class="more-products-button">
-          <div class="t1">See more products</div>
+        <div class="more-products-container">
+          More products
         </div>
       </a>
-    </div>
       
 
     <div class="byos-container" id ="build-stack">

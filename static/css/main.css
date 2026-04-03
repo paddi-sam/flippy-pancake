@@ -134,10 +134,12 @@ body{
   border-width: 1px;
   border-color: white;
   border-radius: 10px;
-  transition: transform 0.2s ease-in-out 
+  transition: transform 0.2s ease-in-out;
+  margin: 150px auto 0 auto;
 }
 
 .more-products-container:hover{
   cursor: pointer;
   transform: scale(1.02);
 }
+
