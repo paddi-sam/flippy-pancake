@@ -112,8 +112,8 @@ def stafflogin():
             return redirect(url_for('index'))
         else:
             flash('Invalid username or password')
-            return render_template('login.html')
-    
+            return render_template('staff-login.html')
+        
     return render_template('staff-login.html')
 
 @app.route('/logout')
