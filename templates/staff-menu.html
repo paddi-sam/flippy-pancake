@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Staff dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/staff.css') }}">
 </head>
 <body>
-    Coming soon
+    <div class="top-container">
+        <h1 style="font-size: 48px; font-weight: bolder;">Flippy pancake staff dashboard</h1>
+
+    </div>
+
+    <div class="content-container">
+        <div class="sub-container">
+            <h1 style="margin-top: 20px; font-size: 32px;">Flippy Staff Users</h1>
+            <h3>Note: Only the first staff registered can remove other staff users</h3>
+            <div class="sub-content-container"></div>
+        </div>
+        <div class="sub-container">
+            <h1 style="margin-top: 20px; font-size: 32px;">Flippy Product Records</h1>
+            <div class="sub-content-container"></div>
+        </div>
+    </div>
 </body>
 </html>
