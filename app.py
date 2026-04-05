@@ -147,9 +147,29 @@ def menu():
 def staff_menu():
     if not session.get('staff'):
         flash("You need to be staff to see this")
-        return redirect(url_for('stafflogin'))
-    else:
-        return render_template('staff-menu.html')
+        return redirect(url_for('login'))
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT id, username FROM staff')
+    users = cursor.fetchall()
+
+    connection.close()
+
+    return render_template('staff-menu.html', users=users)
+
+@app.route('/delete_staff', methods=['POST'])
+def delete_staff():
+    user_id = request.form.get('user_id')
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+    cursor.execute('DELETE FROM staff WHERE id = ?', (user_id,))
+    connection.commit()
+    connection.close()
+
+    return redirect(url_for('staff_menu'))
 
 if __name__ == '__main__':
     app.run(debug=True)

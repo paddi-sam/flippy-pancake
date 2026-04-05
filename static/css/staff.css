@@ -37,3 +37,43 @@ body{
     border-radius: 10px;
     background: rgba(0,0,0,0.3);
 }
+
+.top-row{
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.top-row-text{
+    padding: 10px;
+    color: white
+}
+
+.user-row {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.top-row,
+.user-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 100px; 
+    align-items: center;
+}
+
+.button{
+    width: 7vw;
+    height: 5vh;
+    background-color: black;
+    border-radius: 10px;
+    border:none;
+    z-index: 1;
+    transition: 0.2s ease-in-out;
+    top: 0;
+    right: 0;
+}
+
+.button:hover{
+    cursor: pointer;
+    transform: scale(1.02)
+}

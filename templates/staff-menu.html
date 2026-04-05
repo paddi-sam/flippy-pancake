@@ -15,13 +15,38 @@
     <div class="content-container">
         <div class="sub-container">
             <h1 style="margin-top: 20px; font-size: 32px;">Flippy Staff Users</h1>
+            <button class="button" type="submit">
+                <h3 style="color: white;">Add staff</h3>
+            </button>
             <h3>Note: Only the first staff registered can remove other staff users</h3>
-            <div class="sub-content-container"></div>
+        <div class="sub-content-container">
+            <div class="top-row">
+                <div class="top-row-text">ID</div>
+                <div class="top-row-text">Name</div>
+                <div></div>
+            </div>
+        
+            {% for user in users %}
+                <div class="user-row">
+                    <div>{{ user[0] }}</div>
+                    <div>{{ user[1] }}</div>
+                
+                    <form method="POST" action="/delete_staff">
+                        <input type="hidden" name="user_id" value="{{ user[0] }}">
+                        <button class="button" type="submit">
+                            <h3 style="color: white;">Delete</h3>
+                        </button>
+                    </form>
+                </div>
+            {% endfor %}
         </div>
+        </div>
+
         <div class="sub-container">
             <h1 style="margin-top: 20px; font-size: 32px;">Flippy Product Records</h1>
             <div class="sub-content-container"></div>
         </div>
+        
     </div>
 </body>
 </html>
