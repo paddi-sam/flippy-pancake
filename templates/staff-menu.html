@@ -15,9 +15,11 @@
     <div class="content-container">
         <div class="sub-container">
             <h1 style="margin-top: 20px; font-size: 32px;">Flippy Staff Users</h1>
-            <button class="button" type="submit">
-                <h3 style="color: white;">Add staff</h3>
-            </button>
+            <a href="{{ url_for('staff_register') }}">
+                <button class="button" type="submit">
+                    <h3 style="color: white;">Add staff</h3>
+                </button>               
+            </a>
             <h3>Note: Only the first staff registered can remove other staff users</h3>
         <div class="sub-content-container">
             <div class="top-row">
