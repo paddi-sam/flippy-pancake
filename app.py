@@ -155,9 +155,13 @@ def staff_menu():
     cursor.execute('SELECT id, username FROM staff')
     users = cursor.fetchall()
 
+    cursor.execute('SELECT id FROM staff ORDER BY id ASC LIMIT 1')
+    first_user = cursor.fetchone()
+    first_user_id = first_user[0] if first_user else None
+
     connection.close()
 
-    return render_template('staff-menu.html', users=users)
+    return render_template('staff-menu.html', users=users, first_user_id=first_user_id)
 
 @app.route('/delete_staff', methods=['POST'])
 def delete_staff():
@@ -165,6 +169,15 @@ def delete_staff():
 
     connection = sqlite3.connect('DB.db')
     cursor = connection.cursor()
+
+    cursor.execute('SELECT id FROM staff ORDER BY id ASC LIMIT 1')
+    first_user = cursor.fetchone()
+
+    if first_user and str(first_user[0]) == str(user_id):
+        flash("You can't delete the first staff user!")
+        connection.close()
+        return redirect(url_for('staff_menu'))
+
     cursor.execute('DELETE FROM staff WHERE id = ?', (user_id,))
     connection.commit()
     connection.close()

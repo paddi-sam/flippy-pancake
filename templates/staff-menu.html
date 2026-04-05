@@ -31,12 +31,16 @@
                     <div>{{ user[0] }}</div>
                     <div>{{ user[1] }}</div>
                 
-                    <form method="POST" action="/delete_staff">
-                        <input type="hidden" name="user_id" value="{{ user[0] }}">
-                        <button class="button" type="submit">
-                            <h3 style="color: white;">Delete</h3>
-                        </button>
-                    </form>
+                    {% if user[0] == first_user_id %}
+                        <button class="button" style="background: rgba(0,0,0,0.3);">Cant delete</button>
+                    {% else %}
+                        <form method="POST" action="/delete_staff">
+                            <input type="hidden" name="user_id" value="{{ user[0] }}">
+                            <button class="button" type="submit">
+                                <h3 style="color: white;">Delete</h3>
+                            </button>
+                        </form>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
