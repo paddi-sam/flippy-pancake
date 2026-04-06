@@ -58,46 +58,44 @@
                 <h3 style="color: white;">Add product</h3>
             </button>
 
-            <div class="modal" id="modal">
-                <div class="modal-inner">
-                
-                    <h1>Add a product to Flippy's menu</h1>
-                
-                    <label class="username-container">
-                        <input type="text" name="product_name" required>
-                        <div class="login-text">
-                            Product Name
+            <form method="POST" action="/additem">
+                <div class="modal" id="modal">
+                    <div class="modal-inner">
+                    
+                        <h1>Add a product to Flippy's menu</h1>
+                    
+                        <label class="username-container">
+                            <input type="text" name="product_name" required>
+                            <div class="login-text">Product Name</div>
+                        </label>
+                    
+                        <div class="dual-width-container">
+                        
+                            <label class="smaller-container">
+                                <input type="text" name="price" required>
+                                <div class="login-text">Price</div>
+                            </label>
+                        
+                            <label class="username-container" id="drop-zone" style="cursor: pointer;">
+                                <input type="file" id="file-input" accept="image/*" hidden>
+                            
+                                <div class="login-text">Drag or click to upload</div>
+                                <div id="file-name"></div>
+                            </label>
                         </div>
-                    </label>
-                
+                    
                     <div class="dual-width-container">
+                        <button class="button" type="submit">
+                            <h3 style="color: white;">Add product</h3>
+                        </button>
                     
-                        <label class="smaller-container">
-                            <input type="text" name="price" required>
-                            <div class="login-text">
-                                Price
-                            </div>
-                        </label>
-                    
-                        <label class="smaller-container">
-                            <input type="text" name="stock" required>
-                            <div class="login-text">
-                                Stock
-                            </div>
-                        </label>
+                        <button id="closemodal" class="button">
+                            <h3 style="color: white">Close</h3>
+                        </button>                      
                     </div>
-
-                    <div class="dual-width-container">
-                    <button type="submit" class="button">
-                        <h3 style="color: white">Add product</h3>
-                    </button>
-                
-                    <button id="closemodal" class="button">
-                        <h3 style="color: white">Close</h3>
-                    </button>                         
-                    </div>             
+                    </div>
                 </div>
-            </div>   
+            </form>
 
             <div class="sub-content-container" style="margin-top: 20px;">
                 <div class="top-row">

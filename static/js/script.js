@@ -122,3 +122,53 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+
+dropZone.addEventListener('click', () => {
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', () => {
+    handleFile(fileInput.files[0]);
+});
+
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+
+    const file = e.dataTransfer.files[0];
+    handleFile(file);
+});
+
+function handleFile(file) {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    });
+}
+
+const fileNameDisplay = document.getElementById('file-name');
+
+function handleFile(file) {
+    if (!file) return;
+
+    fileNameDisplay.textContent = file.name;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    });
+}

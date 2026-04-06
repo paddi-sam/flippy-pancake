@@ -256,5 +256,20 @@ def delete_item():
 
     return redirect(url_for('staff_menu'))
 
+@app.route('/additem', methods=['POST'])
+def add_item():
+
+        connection = sqlite3.connect('DB.db')
+        cursor = connection.cursor()
+
+        product_name = request.form.get('product_name')
+        product_price = request.form.get('price')
+
+        cursor.execute('INSERT INTO items (NAME, PRICE) VALUES (?, ?)', (product_name, product_price))
+        connection.commit()
+        connection.close()
+
+        return redirect(url_for('staff_menu'))
+
 if __name__ == '__main__':
     app.run(debug=True)
