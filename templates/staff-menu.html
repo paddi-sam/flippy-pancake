@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/staff.css') }}">
 </head>
 <body>
+    <a href="{{ url_for('index') }}" class="back-to-home-container">
+        <img src="{{ url_for('static', filename='images/arrow-left.png') }}">
+        <div class="bth-text">Back to Home</div>
+    </a>
     <div class="top-container">
         <h1 style="font-size: 48px; font-weight: bolder;">Flippy pancake staff dashboard</h1>
 
@@ -20,12 +24,11 @@
                     <h3 style="color: white;">Add staff</h3>
                 </button>               
             </a>
-            <h3>Note: Only the first staff registered can remove other staff users</h3>
+            <h3>Note: The first staff member cant be removed</h3>
         <div class="sub-content-container">
             <div class="top-row">
                 <div class="top-row-text">ID</div>
                 <div class="top-row-text">Name</div>
-                <div></div>
             </div>
         
             {% for user in users %}
@@ -50,7 +53,28 @@
 
         <div class="sub-container">
             <h1 style="margin-top: 20px; font-size: 32px;">Flippy Product Records</h1>
-            <div class="sub-content-container"></div>
+            <div class="sub-content-container">
+                <div class="top-row">
+                    <div class="top-row-text">ID</div>
+                    <div class="top-row-text">Name</div>
+                    <div class="top-row-text">Price</div>
+                </div>
+
+            {% for item in items %}
+                <div class="user-row">
+                    <div>{{ item[0] }}</div>
+                    <div>{{ item[1] }}</div>
+                    <div>{{ item[2] }}</div>
+                
+                <form method="POST" action="/delete_item">
+                    <input type="hidden" name="ITEM_ID" value="{{ item[0] }}">
+                    <button class="button" type="submit">
+        <h3 style="color: white;">Delete</h3>
+                    </button>
+                </form>
+                </div>
+            {% endfor %}
+            </div>
         </div>
         
     </div>

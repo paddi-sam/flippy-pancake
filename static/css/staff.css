@@ -38,7 +38,7 @@ body{
     background: rgba(0,0,0,0.3);
 }
 
-.top-row{
+.top-row {
     background: rgba(0,0,0,0.5);
     border-radius: 10px;
     margin-bottom: 10px;
@@ -57,8 +57,10 @@ body{
 .top-row,
 .user-row {
     display: grid;
-    grid-template-columns: 200px 1fr 150px; 
+    grid-template-columns: 200px 1fr 150px 20%;
     align-items: center;
+    gap: 20px;
+    width: 100%;
 }
 
 .button{
@@ -76,4 +78,27 @@ body{
 .button:hover{
     cursor: pointer;
     transform: scale(1.02)
+}
+
+.back-to-home-container{
+    width:500px;
+    height:100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;       
+    text-decoration: none;
+    color: inherit;  
+}
+
+.back-to-home-container:hover{
+    cursor:pointer
+}
+
+.bth-text{
+    font-weight: lighter;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
 }

@@ -158,10 +158,13 @@ def staff_menu():
     cursor.execute('SELECT id FROM staff ORDER BY id ASC LIMIT 1')
     first_user = cursor.fetchone()
     first_user_id = first_user[0] if first_user else None
+    
+    cursor.execute('SELECT ITEM_ID, NAME, PRICE FROM items')
+    items = cursor.fetchall()
 
     connection.close()
 
-    return render_template('staff-menu.html', users=users, first_user_id=first_user_id)
+    return render_template('staff-menu.html', users=users, first_user_id=first_user_id, items=items)
 
 @app.route('/staffregister', methods=['GET', 'POST'])
 def staff_register():
@@ -236,6 +239,19 @@ def delete_staff():
         return redirect(url_for('staff_menu'))
 
     cursor.execute('DELETE FROM staff WHERE id = ?', (user_id,))
+    connection.commit()
+    connection.close()
+
+    return redirect(url_for('staff_menu'))
+
+@app.route('/delete_item', methods=['POST']) 
+def delete_item():
+    item_id = request.form.get('ITEM_ID')
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+    
+    cursor.execute('DELETE FROM items WHERE ITEM_ID = ?', (item_id,))
     connection.commit()
     connection.close()
 
