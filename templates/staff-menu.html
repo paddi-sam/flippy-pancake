@@ -62,7 +62,7 @@
 
             <h3 style="margin-bottom: 0px;">Note: Prices should be input xx.xx</h3>
 
-            <form method="POST" action="/additem">
+            <form method="POST" action="/additem" enctype="multipart/form-data">
                 <div class="modal" id="modal">
                     <div class="modal-inner">
 
@@ -74,29 +74,27 @@
                         </label>
 
                         <div class="dual-width-container">
-
                             <label class="smaller-container">
-                                <input type="text" name="price" required>
+                                <input type="text" name="price" placeholder="xx.xx" required>
                                 <div class="login-text">Price</div>
                             </label>
 
-                            <label class="username-container" id="drop-zone" style="cursor: pointer;">
-                                <input type="file" id="file-input" accept="image/*" hidden>
-
-                                <div class="login-text">Drag or click to upload</div>
-                                <div id="file-name"></div>
+                            <label class="smaller-container" id="drop-zone" style="cursor: pointer;">
+                                <input type="file" id="file-input" name="product_image" accept="image/*" hidden>
+                                <div class="login-text">Click to upload image</div>
+                                <div id="file-name" style="font-size: 10px; color: #666;"></div>
                             </label>
                         </div>
 
-                    <div class="dual-width-container">
-                        <button class="button" type="submit">
-                            <h3 style="color: white;">Add product</h3>
-                        </button>
+                        <div class="dual-width-container">
+                            <button class="button" type="submit">
+                                <h3 style="color: white;">Add product</h3>
+                            </button>
 
-                        <button id="closemodal" class="button">
-                            <h3 style="color: white">Close</h3>
-                        </button>
-                    </div>
+                            <button id="closemodal" class="button" type="button">
+                                <h3 style="color: white">Close</h3>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>

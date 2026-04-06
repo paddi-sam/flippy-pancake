@@ -4,13 +4,13 @@ from argon2 import PasswordHasher
 ph=PasswordHasher()
 
 print(r"""
-  ______ _ _                         _         __  __       _       _        _                    
- |  ____| (_)                       | |       / _|/ _|     | |     | |      | |                   
- | |__  | |_ _ __  _ __  _   _   ___| |_ __ _| |_| |_    __| | __ _| |_ __ _| |__   __ _ ___  ___ 
+  ______ _ _                         _         __  __       _       _        _
+ |  ____| (_)                       | |       / _|/ _|     | |     | |      | |
+ | |__  | |_ _ __  _ __  _   _   ___| |_ __ _| |_| |_    __| | __ _| |_ __ _| |__   __ _ ___  ___
  |  __| | | | '_ \| '_ \| | | | / __| __/ _` |  _|  _|  / _` |/ _` | __/ _` | '_ \ / _` / __|/ _ \
  | |    | | | |_) | |_) | |_| | \__ \ || (_| | | | |   | (_| | (_| | || (_| | |_) | (_| \__ \  __/
  |_|    |_|_| .__/| .__/ \__, | |___/\__\__,_|_| |_|    \__,_|\__,_|\__\__,_|_.__/ \__,_|___/\___|
-            | |   | |     __/ |                                                                   
+            | |   | |     __/ |
             |_|   |_|    |___/                                                                    """)
 
 conn = sqlite3.connect('DB.db')
@@ -34,7 +34,7 @@ def staff_username():
         else:
             flag = False
             return staff_user
-        
+
 def staff_pass():
     while True:
 
@@ -59,7 +59,7 @@ def staff_pass():
             return staff_password
         else:
             print("Password too weak, try again")
-        
+
 valid_user = staff_username()
 valid_pass = staff_pass()
 
@@ -85,23 +85,29 @@ cursor.execute('''
     CREATE TABLE IF NOT EXISTS items (
         item_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        price REAL NOT NULL
+        price REAL NOT NULL,
+        image TEXT NOT NULL
     )
 ''')
 
 try:
-    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
-                   (1, 'Berries & Cream', 5.49))
-    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
-                   (2, 'Chocolate Stack', 6.99))
-    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
-                   (3, 'Lemon and syrup', 6.49))
-    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
-                   (4, 'Strawberry and sauce', 7.49))
-    cursor.execute('INSERT INTO items (item_id, name, price) VALUES (?,?,?)',
-                   (5, 'Gluten free', 6.49))
+    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
+                   (1, 'Berries & Cream', 5.49, 'static/images/berries-cream.jpg'))
+
+    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
+                   (2, 'Chocolate Stack', 6.99, 'static/images/Chocolate-pancakes.jpg'))
+
+    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
+                   (3, 'Lemon and syrup', 6.49, 'static/images/lemon-pancakes.jpg'))
+
+    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
+                   (4, 'Strawberry and sauce', 7.49, 'static/images/strawberry-pancakes.jpg'))
+
+    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
+                   (5, 'Gluten free', 6.49, 'static/images/glutenfree-stack.jpg'))
+
     print("Products successfully created")
-    
+
 except sqlite3.IntegrityError:
     pass
 

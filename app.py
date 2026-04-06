@@ -2,11 +2,17 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 import sqlite3
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
 
 ph=PasswordHasher()
+
+UPLOAD_FOLDER = 'static/images'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
 def index():
@@ -274,7 +280,16 @@ def add_item():
         product_name = request.form.get('product_name')
         product_price = request.form.get('price')
 
-        cursor.execute('INSERT INTO items (NAME, PRICE) VALUES (?, ?)', (product_name, product_price))
+        file = request.files.get('product_image')
+        filename = "default.png"
+
+        if file and file.filename != '':
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        cursor.execute('INSERT INTO items (NAME, PRICE, IMAGE) VALUES (?, ?, ?)',
+                           (product_name, product_price, filename))
+        
         connection.commit()
         connection.close()
 
