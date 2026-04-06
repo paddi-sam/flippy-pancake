@@ -102,3 +102,29 @@ body{
     display: flex;
     align-items: center;
 }
+
+.modal {
+    background-color: rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-inner{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px 25px;
+    text-align: center;
+    width: 35%
+}

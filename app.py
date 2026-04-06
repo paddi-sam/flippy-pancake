@@ -147,7 +147,7 @@ def menu():
 def staff_menu():
     if not session.get('staff'):
         flash("You need to be staff to see this")
-        return redirect(url_for('login'))
+        return redirect(url_for('stafflogin'))
 
     connection = sqlite3.connect('DB.db')
     cursor = connection.cursor()

@@ -8,7 +8,7 @@
 </head>
 <body>
     <a href="{{ url_for('index') }}" class="back-to-home-container">
-        <img src="{{ url_for('static', filename='images/arrow-left.png') }}">
+        <img src="{{ url_for('static', filename='images/icons/arrow-left.png') }}">
         <div class="bth-text">Back to Home</div>
     </a>
     <div class="top-container">
@@ -53,12 +53,24 @@
 
         <div class="sub-container">
             <h1 style="margin-top: 20px; font-size: 32px;">Flippy Product Records</h1>
-                <form method="POST" action="/" style="margin-bottom: 20px;">
-                    <button class="button" type="submit">
-                    <h3 style="color: white;">Add item</h3>
+
+            <button id="openmodal" class="button">
+                <h3 style="color: white;">Add product</h3>
+            </button>
+
+            <div class="modal" id="modal">
+                <div class="modal-inner">
+                    <h2>Placeholder1</h2>
+                    <p>
+                        Placeholder2
+                    </p>
+                    <button id="closemodal" class="button">
+                        <h3 style="color: white">Close</h3>
                     </button>
-                </form>
-            <div class="sub-content-container">
+                </div>
+            </div>    
+
+            <div class="sub-content-container" style="margin-top: 20px;">
                 <div class="top-row">
                     <div class="top-row-text">ID</div>
                     <div class="top-row-text">Name</div>
@@ -74,14 +86,14 @@
                 <form method="POST" action="/delete_item">
                     <input type="hidden" name="ITEM_ID" value="{{ item[0] }}">
                     <button class="button" type="submit">
-        <h3 style="color: white;">Delete</h3>
+                        <h3 style="color: white;">Delete</h3>
                     </button>
                 </form>
                 </div>
             {% endfor %}
             </div>
         </div>
-        
     </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
