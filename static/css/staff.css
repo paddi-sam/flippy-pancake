@@ -121,10 +121,99 @@ body{
     pointer-events: auto;
 }
 
-.modal-inner{
+.modal-inner {
     background-color: #fff;
     border-radius: 5px;
-    padding: 15px 25px;
-    text-align: center;
-    width: 35%
+    padding: 20px;
+    width: 35%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.username-container {
+    position: relative;
+    width: 60%;
+    height: 50px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.username-container input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    padding: 0 12px;
+}
+
+.dual-width-container {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.smaller-container {
+    position: relative;
+    flex: 1;
+    height: 50px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.smaller-container input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    padding: 0 12px;
+}
+
+.login-text {
+    position: absolute;
+    left: 12px;
+    top: -10px;
+    background: white;
+    padding: 0 5px;
+    font-size: 12px;
+}
+
+.username-container:hover,
+.smaller-container:hover {
+    cursor: text;
+    background-color: white;
+    transform: scale(1.03);
+    border-color: gray;
+}
+
+.button {
+    margin-top: 20px;
+    width: 7vw;
+    height: 5vh;
+    background-color: black;
+    border-radius: 10px;
+    border: none;
+    transition: 0.2s;
+}
+
+.button:hover {
+    cursor: pointer;
+    transform: scale(1.02);
 }

@@ -143,7 +143,7 @@ def logout():
 def menu():
     return render_template('menu.html')
 
-@app.route('/staffmenu')
+@app.route('/staffmenu', methods=['GET', 'POST'])
 def staff_menu():
     if not session.get('staff'):
         flash("You need to be staff to see this")
@@ -221,7 +221,6 @@ def staff_register():
         return redirect(url_for('staff_menu'))
     
     return render_template('staffregister.html')
-
 
 @app.route('/delete_staff', methods=['POST'])
 def delete_staff():
