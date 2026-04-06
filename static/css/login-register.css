@@ -145,7 +145,7 @@ body{
 .bg-image {
   position: fixed;
   inset: 0;
-  background: url("/static/images/login.jpg") center/cover no-repeat;
+  background: url("/static/images/icons/login.jpg") center/cover no-repeat;
   z-index: 0;
 }
 
