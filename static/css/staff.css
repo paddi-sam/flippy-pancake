@@ -1,8 +1,8 @@
 body{
  background: #ffe1a8;
  display: flex;
- flex-direction: column;  
-} 
+ flex-direction: column;
+}
 
 .top-container{
     width: 100%;
@@ -20,22 +20,26 @@ body{
     flex-direction: row;
 }
 
-.sub-container{
+.sub-container {
     width: 45%;
-    height: 100%;
+    height: 75vh;
     background-color: rgb(214, 214, 214);
     margin-left: 3.5%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
-.sub-content-container{
+.sub-content-container {
     width: 95%;
-    height: 70vh;
+    flex: 1;
+    margin-bottom: 20px;
     border-radius: 10px;
     background: rgba(0,0,0,0.3);
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .top-row {
@@ -57,22 +61,39 @@ body{
 .top-row,
 .user-row {
     display: grid;
-    grid-template-columns: 200px 1fr 150px 20%;
+    grid-template-columns: 50px 1.2fr 1fr 200px;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
-.button{
-    width: 7vw;
-    height: 5vh;
+.button {
+    min-width: 120px;
+    min-height: 40px;
+    padding: 10px 20px;
+
     background-color: black;
+    color: white;
     border-radius: 10px;
-    border:none;
-    z-index: 1;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    cursor: pointer;
     transition: 0.2s ease-in-out;
-    top: 0;
-    right: 0;
+}
+
+.button h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: white;
 }
 
 .button:hover{
@@ -87,9 +108,9 @@ body{
     top: 0;
     left: 0;
     display: flex;
-    align-items: center;       
+    align-items: center;
     text-decoration: none;
-    color: inherit;  
+    color: inherit;
 }
 
 .back-to-home-container:hover{
@@ -227,4 +248,8 @@ body{
     margin-left: 10px;
     font-size: 14px;
     color: #333;
+}
+
+a {
+    text-decoration: none;
 }

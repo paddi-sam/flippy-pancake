@@ -22,7 +22,7 @@
             <a href="{{ url_for('staff_register') }}">
                 <button class="button" type="submit">
                     <h3 style="color: white;">Add staff</h3>
-                </button>               
+                </button>
             </a>
             <h3>Note: The first staff member cant be removed</h3>
         <div class="sub-content-container">
@@ -30,14 +30,16 @@
                 <div class="top-row-text">ID</div>
                 <div class="top-row-text">Name</div>
             </div>
-        
+
             {% for user in users %}
                 <div class="user-row">
                     <div>{{ user[0] }}</div>
                     <div>{{ user[1] }}</div>
-                
-                    {% if user[0] == first_user_id %}
-                        <button class="button" style="background: rgba(0,0,0,0.3);">Cant delete</button>
+
+                    {% if user[0] == first_user_id or user[0] == current_user_id %}
+                        <button class="button" style="background: rgba(0,0,0,0.3);">
+                            <h3 style="color: white;">Cant delete</h3>
+                        </button>
                     {% else %}
                         <form method="POST" action="/delete_staff">
                             <input type="hidden" name="user_id" value="{{ user[0] }}">
@@ -58,40 +60,42 @@
                 <h3 style="color: white;">Add product</h3>
             </button>
 
+            <h3 style="margin-bottom: 0px;">Note: Prices should be input xx.xx</h3>
+
             <form method="POST" action="/additem">
                 <div class="modal" id="modal">
                     <div class="modal-inner">
-                    
+
                         <h1>Add a product to Flippy's menu</h1>
-                    
+
                         <label class="username-container">
                             <input type="text" name="product_name" required>
                             <div class="login-text">Product Name</div>
                         </label>
-                    
+
                         <div class="dual-width-container">
-                        
+
                             <label class="smaller-container">
                                 <input type="text" name="price" required>
                                 <div class="login-text">Price</div>
                             </label>
-                        
+
                             <label class="username-container" id="drop-zone" style="cursor: pointer;">
                                 <input type="file" id="file-input" accept="image/*" hidden>
-                            
+
                                 <div class="login-text">Drag or click to upload</div>
                                 <div id="file-name"></div>
                             </label>
                         </div>
-                    
+
                     <div class="dual-width-container">
                         <button class="button" type="submit">
                             <h3 style="color: white;">Add product</h3>
                         </button>
-                    
+
                         <button id="closemodal" class="button">
                             <h3 style="color: white">Close</h3>
-                        </button>                      
+                        </button>
                     </div>
                     </div>
                 </div>
@@ -109,13 +113,13 @@
                     <div>{{ item[0] }}</div>
                     <div>{{ item[1] }}</div>
                     <div>{{ item[2] }}</div>
-                
-                <form method="POST" action="/delete_item">
-                    <input type="hidden" name="ITEM_ID" value="{{ item[0] }}">
-                    <button class="button" type="submit">
-                        <h3 style="color: white;">Delete</h3>
-                    </button>
-                </form>
+
+                    <form method="POST" action="/delete_item" class="delete-form">
+                        <input type="hidden" name="ITEM_ID" value="{{ item[0] }}">
+                        <button class="button" type="submit">
+                            <h3 style="color: white;">Delete</h3>
+                        </button>
+                    </form>
                 </div>
             {% endfor %}
             </div>

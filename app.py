@@ -40,7 +40,7 @@ def login():
         else:
             flash('Invalid username or password')
             return render_template('login.html')
-    
+
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -57,19 +57,19 @@ def register():
         if password != confirm_password:
             flash('Passwords do not match!')
             return render_template('register.html')
-        
+
         if len(password) < 8:
             flash("Password too short!")
             return render_template('register.html')
 
-        num_count = 0     
+        num_count = 0
         for i in password:
             if i.isdigit() == True:
                 num_count += 1
         if num_count < 3:
             flash("Password needs to have 3 numbers!")
             return render_template('register.html')
-        
+
         special_chars = set("!@#$%^&*()-_=+[]{};:'\",.<>/?\\|")
         special_count = 0
         for i in password:
@@ -78,7 +78,7 @@ def register():
         if special_count < 1:
             flash("Password must contain a special character")
             return render_template('register.html')
-        
+
         connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
@@ -88,7 +88,7 @@ def register():
             connection.close()
             flash('Username already taken!')
             return render_template('register.html')
-        
+
         hashed_password = ph.hash(password)
         cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
         connection.commit()
@@ -128,7 +128,7 @@ def stafflogin():
         else:
             flash('Invalid username or password')
             return render_template('staff-login.html')
-        
+
     return render_template('staff-login.html')
 
 @app.route('/logout')
@@ -152,19 +152,28 @@ def staff_menu():
     connection = sqlite3.connect('DB.db')
     cursor = connection.cursor()
 
+    current_username = session.get('username')
+    cursor.execute('SELECT id FROM staff WHERE username = ?', (current_username,))
+    current_user_row = cursor.fetchone()
+    current_user_id = current_user_row[0] if current_user_row else None
+
     cursor.execute('SELECT id, username FROM staff')
     users = cursor.fetchall()
 
     cursor.execute('SELECT id FROM staff ORDER BY id ASC LIMIT 1')
     first_user = cursor.fetchone()
     first_user_id = first_user[0] if first_user else None
-    
+
     cursor.execute('SELECT ITEM_ID, NAME, PRICE FROM items')
     items = cursor.fetchall()
 
     connection.close()
 
-    return render_template('staff-menu.html', users=users, first_user_id=first_user_id, items=items)
+    return render_template('staff-menu.html',
+                           users=users,
+                           first_user_id=first_user_id,
+                           current_user_id=current_user_id,
+                           items=items)
 
 @app.route('/staffregister', methods=['GET', 'POST'])
 def staff_register():
@@ -175,24 +184,24 @@ def staff_register():
 
         if not staff_username or not staff_password or not confirm_password:
             flash('All fields are required!')
-            return render_template('register.html')
+            return render_template('staffregister.html')
 
         if staff_password != confirm_password:
             flash('Passwords do not match!')
-            return render_template('register.html')
-        
+            return render_template('staffregister.html')
+
         if len(staff_password) < 8:
             flash("Password too short!")
-            return render_template('register.html')
+            return render_template('staffregister.html')
 
-        num_count = 0     
+        num_count = 0
         for i in staff_password:
             if i.isdigit():
                 num_count += 1
         if num_count < 3:
             flash("Password needs to have 3 numbers!")
-            return render_template('register.html')
-        
+            return render_template('staffregister.html')
+
         special_chars = set("!@#$%^&*()-_=+[]{};:'\",.<>/?\\|")
         special_count = 0
         for i in staff_password:
@@ -201,7 +210,7 @@ def staff_register():
         if special_count < 1:
             flash("Password must contain a special character")
             return render_template('register.html')
-        
+
         connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM staff WHERE username = ?', (staff_username,))
@@ -210,8 +219,8 @@ def staff_register():
         if existing_user:
             connection.close()
             flash('Username already taken!')
-            return render_template('register.html')
-        
+            return render_template('staffregister.html')
+
         hashed_password = ph.hash(staff_password)
         cursor.execute('INSERT INTO staff (username, password) VALUES (?, ?)', (staff_username, hashed_password))
         connection.commit()
@@ -219,7 +228,7 @@ def staff_register():
 
         flash('Staff added')
         return redirect(url_for('staff_menu'))
-    
+
     return render_template('staffregister.html')
 
 @app.route('/delete_staff', methods=['POST'])
@@ -243,13 +252,13 @@ def delete_staff():
 
     return redirect(url_for('staff_menu'))
 
-@app.route('/delete_item', methods=['POST']) 
+@app.route('/delete_item', methods=['POST'])
 def delete_item():
     item_id = request.form.get('ITEM_ID')
 
     connection = sqlite3.connect('DB.db')
     cursor = connection.cursor()
-    
+
     cursor.execute('DELETE FROM items WHERE ITEM_ID = ?', (item_id,))
     connection.commit()
     connection.close()
