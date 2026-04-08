@@ -289,11 +289,15 @@ def add_item():
 
         cursor.execute('INSERT INTO items (NAME, PRICE, IMAGE) VALUES (?, ?, ?)',
                            (product_name, product_price, filename))
-        
+
         connection.commit()
         connection.close()
 
         return redirect(url_for('staff_menu'))
+
+@app.route('/tailwind')
+def tailwind():
+    return render_template('tailwind.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
