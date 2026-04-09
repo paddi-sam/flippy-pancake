@@ -4,51 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}">
 </head>
-<body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
+<body class="bg-[url('/static/images/icons/login.jpg')] bg-cover bg-center bg-black/60 bg-blend-overlay min-h-screen backdrop-blur-sm h-screen w-screen flex flex-col items-center justify-center">
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            {% for message in messages %}
-                <div class="flash-message-container">
-                    <div class="flash-message">{{ message }}</div>
-                </div>
-            {% endfor %}
+            <div class="absolute top-5 flex flex-col space-y-2 z-50">
+                {% for message in messages %}
+                    <div class="bg-red-600 text-white px-4 py-2 rounded shadow">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
     {% endwith %}
 
-    <div class="bg-image"></div>
-    <a href="{{ url_for('index') }}" class="back-to-home-container">
-        <img src="{{ url_for('static', filename='images/icons/arrow-left.png') }}">
-        <div class="bth-text">Back to Home</div>
-    </a>
+    <div class="w-1/2 h-auto bg-[#1A1A1A] rounded-2xl flex flex-col items-center overflow-hidden p-10">
+        <div class="font-bold text-5xl md:text-6xl my-6 mb-16 text-white text-center">Flippy Pancakes Register</div>
 
-    <div class="login-container">
-        <div class="title">Flippy Pancakes Register</div>
-    
-        <form method="post" action="/register">
-        
-            <label class="username-container">
-                <input type="text" name="username" required>
-                <div class="login-text">Username</div>
-            </label>
-        
-            <div class="username-container">
-                <input type="password" name="password" required>
-                <div class="login-text">Password</div>
+        <form method="post" action="/register" class="w-full flex flex-col items-center space-y-8">
+
+            <div class="relative w-3/4 md:w-1/2 h-16 bg-[#A4144C] border-white/50 border-2 rounded-2xl transition-transform duration-150 hover:scale-[1.01]">
+                <input type="text" name="username" required
+                    class="absolute inset-0 w-full h-full bg-transparent px-4 py-2 text-white outline-none rounded-2xl"
+                    placeholder="Username">
             </div>
 
-            <div class="username-container">
-                <input type="password" name="confirm_password" required>
-                <div class="login-text">Confirm Password</div>
+            <div class="relative w-3/4 md:w-1/2 h-16 bg-[#A4144C] border-white/50 border-2 rounded-2xl transition-transform duration-150 hover:scale-[1.01]">
+                <input type="password" name="password" required
+                    class="absolute inset-0 w-full h-full bg-transparent px-4 py-2 text-white outline-none rounded-2xl"
+                    placeholder="Password">
             </div>
-        
-            <button class="login-button" type="submit">
-                <h2>Register</h2>
+
+            <div class="relative w-3/4 md:w-1/2 h-16 bg-[#A4144C] border-white/50 border-2 rounded-2xl transition-transform duration-150 hover:scale-[1.01]">
+                <input type="password" name="confirm_password" required
+                    class="absolute inset-0 w-full h-full bg-transparent px-4 py-2 text-white outline-none rounded-2xl"
+                    placeholder="Confirm Password">
+            </div>
+
+            <button type="submit"
+                class="w-1/4 md:w-1/5 h-16 bg-transparent border-2 border-white/50 rounded-2xl text-white font-bold text-2xl hover:bg-[#A4144C] hover:scale-[1.02] transition-all duration-200 overflow-hidden cursor-pointer">
+                Register
             </button>
-        
+
         </form>
+
+        <a href="{{ url_for('index') }}" class="absolute top-4 left-4 hover:scale-105 transition-transform bg-white/20 p-3 rounded-2xl">
+            <img src="{{ url_for('static', filename='images/icons/arrow-left.png') }}" class="w-20 h-20">
+            Back to home
+        </a>
     </div>
 </body>
 </html>
