@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}">
+</head>
+<body class="bg-[url('/static/images/icons/login.jpg')] bg-cover bg-center min-h-screen backdrop-blur-sm h-screen w-screen flex flex-col items-center justify-center">
+    <div class="w-1/2 h-2/3 bg-[#1A1A1A] rounded-2xl flex flex-col items-center overflow-hidden">
+        <div class="font-bold text-7xl my-12.5 text-white">Flippy Login</div>
+        <div class="relative w-1/2 h-1/10 bg-[#A4144C] border-white/50 border-2 rounded-2xl transition-transform duration-150 hover:scale-[1.01] cursor-text mt-9">
+            <div class="absolute -translate-y-full -translate-[-20%] left-0 text-white">Username</div>
+        </div>
+        <div class="relative w-1/2 h-1/10 bg-[#A4144C] border-white/50 border-2 rounded-2xl transition-transform duration-150 hover:scale-[1.01] cursor-text mt-16">
+            <div class="absolute -translate-y-full -translate-[-20%] left-0 text-white">Password</div>
+        </div>
+
+        <button class="w-1/5 h-1/10 bg-transparent transition-[scale,background-color] duration-200 ease-in-out hover:scale-102 hover:bg-[#A4144C] border-white/50 border-2 rounded-2xl mt-16 cursor-pointer flex flex-col justify-center items-center">
+            <div class="text-white font-bold text-2xl">Login</div>
+        </button>
+    </div>
+</body>
+</html>

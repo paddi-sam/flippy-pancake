@@ -299,5 +299,9 @@ def add_item():
 def tailwind():
     return render_template('tailwind.html')
 
+@app.route('/tregister')
+def tregister():
+    return render_template('t-register.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
