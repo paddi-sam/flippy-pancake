@@ -106,69 +106,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("closemodal");
   const modal = document.getElementById("modal");
 
-  console.log("Modal Debug:", {openBtn, closeBtn, modal});
+  if (!modal || !openBtn || !closeBtn) {
+    console.log("Modal elements missing");
+    return;
+  } 
 
-  if (openBtn && modal) {
-    openBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log("Opening Modal...");
-      modal.classList.add("open");
-    });
+  openBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.classList.add("opacity-100", "pointer-events-auto");
+    modal.classList.remove("opacity-0", "pointer-events-none");
+  });
 
-    if (closeBtn) {
-      closeBtn.addEventListener("click", () => {
-        modal.classList.remove("open");
-      });
+  closeBtn?.addEventListener("click", () => {
+    modal.classList.add("opacity-0", "pointer-events-none");
+    modal.classList.remove("opacity-100", "pointer-events-auto");
+  });
+
+  // Optional: close modal when clicking outside inner
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.add("opacity-0", "pointer-events-none");
+      modal.classList.remove("opacity-100", "pointer-events-auto");
     }
-  }
-});
+  });
 
-const dropZone = document.getElementById('drop-zone');
-const fileInput = document.getElementById('file-input');
+  // File input drag & click
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const fileNameDisplay = document.getElementById('file-name');
 
-dropZone.addEventListener('click', () => {
-    fileInput.click();
-});
+  dropZone.addEventListener('click', () => fileInput.click());
 
-fileInput.addEventListener('change', () => {
-    handleFile(fileInput.files[0]);
-});
-
-dropZone.addEventListener('dragover', (e) => {
+  dropZone.addEventListener('dragover', (e) => e.preventDefault());
+  dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
-});
+    handleFile(e.dataTransfer.files[0]);
+  });
 
-dropZone.addEventListener('drop', (e) => {
-    e.preventDefault();
+  fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
 
-    const file = e.dataTransfer.files[0];
-    handleFile(file);
-});
-
-function handleFile(file) {
+  function handleFile(file) {
     if (!file) return;
-
-    const formData = new FormData();
-    formData.append('image', file);
-
-    fetch('/upload', {
-        method: 'POST',
-        body: formData
-    });
-}
-
-const fileNameDisplay = document.getElementById('file-name');
-
-function handleFile(file) {
-    if (!file) return;
-
     fileNameDisplay.textContent = file.name;
 
     const formData = new FormData();
     formData.append('image', file);
 
-    fetch('/upload', {
-        method: 'POST',
-        body: formData
-    });
-}
+    fetch('/upload', { method: 'POST', body: formData });
+  }
+});

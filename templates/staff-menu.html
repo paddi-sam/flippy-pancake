@@ -3,126 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/staff.css') }}">
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}">
 </head>
-<body>
-    <a href="{{ url_for('index') }}" class="back-to-home-container">
-        <img src="{{ url_for('static', filename='images/icons/arrow-left.png') }}">
-        <div class="bth-text">Back to Home</div>
-    </a>
-    <div class="top-container">
-        <h1 style="font-size: 48px; font-weight: bolder;">Flippy pancake staff dashboard</h1>
+<body class="bg-[#1A1A1A] text-white min-h-screen">
 
+    <a href="{{ url_for('index') }}" class="absolute top-4 left-4 hover:scale-105 transition-transform bg-white/20 p-3 rounded-2xl">
+        <img src="{{ url_for('static', filename='images/icons/arrow-left.png') }}" class="w-20 h-20">
+        Back to home
+    </a>   
+
+    <div class="w-full h-[10vh] flex justify-center items-center">
+        <h1 class="text-4xl font-extrabold text-[#A4133C]">
+            Flippy pancake staff dashboard
+        </h1>
     </div>
 
-    <div class="content-container">
-        <div class="sub-container">
-            <h1 style="margin-top: 20px; font-size: 32px;">Flippy Staff Users</h1>
+    <div class="flex mt-15 w-full h-[75vh] justify-center px-6">
+
+        <div class="flex flex-col items-center w-[45%] h-full bg-[#111111] rounded-xl border border-white/10 p-4 mr-1">
+
+            <div class="text-3xl mb-2">Flippy Staff Users</div>
+
             <a href="{{ url_for('staff_register') }}">
-                <button class="button" type="submit">
-                    <h3 style="color: white;">Add staff</h3>
+                <button class="bg-[#A4133C] hover:bg-[#c9184a] text-white rounded-lg py-2 px-4 transition-all">
+                    Add staff
                 </button>
             </a>
-            <h3>Note: The first staff member cant be removed</h3>
-        <div class="sub-content-container">
-            <div class="top-row">
-                <div class="top-row-text">ID</div>
-                <div class="top-row-text">Name</div>
-            </div>
 
-            {% for user in users %}
-                <div class="user-row">
+            <h3 class="text-sm text-gray-400 mt-2">
+                Note: The first staff member cant be removed
+            </h3>
+
+            <div class="flex-1 w-full mt-4 rounded-lg bg-[#0D0D0D] border border-white/10 overflow-y-auto">
+
+                <div class="grid grid-cols-[50px_1fr_150px] p-3 border-b border-white/10 text-gray-300 text-sm">
+                    <div>ID</div>
+                    <div>Name</div>
+                </div>
+
+                {% for user in users %}
+                <div class="grid grid-cols-[50px_1fr_150px] items-center p-3 border-b border-white/10 hover:bg-white/5 transition">
+
                     <div>{{ user[0] }}</div>
                     <div>{{ user[1] }}</div>
 
                     {% if user[0] == first_user_id or user[0] == current_user_id %}
-                        <button class="button" style="background: rgba(0,0,0,0.3);">
-                            <h3 style="color: white;">Cant delete</h3>
-                        </button>
+                        <div class="text-gray-500 text-sm">Locked</div>
                     {% else %}
                         <form method="POST" action="/delete_staff">
                             <input type="hidden" name="user_id" value="{{ user[0] }}">
-                            <button class="button" type="submit">
-                                <h3 style="color: white;">Delete</h3>
+                            <button class="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded-md text-sm transition">
+                                Delete
                             </button>
                         </form>
                     {% endif %}
                 </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
         </div>
 
-        <div class="sub-container">
-            <h1 style="margin-top: 20px; font-size: 32px;">Flippy Product Records</h1>
+        <div class="flex flex-col items-center w-[45%] h-full bg-[#111111] rounded-xl border border-white/10 p-4">
 
-            <button id="openmodal" class="button">
-                <h3 style="color: white;">Add product</h3>
+            <div class="text-3xl mb-2">Flippy Product Records</div>
+
+            <button id="openmodal"
+                class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all" type="button">
+                Add product
             </button>
 
-            <h3 style="margin-bottom: 0px;">Note: Prices should be input xx.xx</h3>
+            <h3 class="text-sm text-gray-400 mt-2">
+                Note: Prices should be input xx.xx
+            </h3>
 
-            <form method="POST" action="/additem" enctype="multipart/form-data">
-                <div class="modal" id="modal">
-                    <div class="modal-inner">
+            <div class="flex-1 w-full mt-4 rounded-lg bg-[#0D0D0D] border border-white/10 overflow-y-auto">
 
-                        <h1>Add a product to Flippy's menu</h1>
-
-                        <label class="username-container">
-                            <input type="text" name="product_name" required>
-                            <div class="login-text">Product Name</div>
-                        </label>
-
-                        <div class="dual-width-container">
-                            <label class="smaller-container">
-                                <input type="text" name="price" placeholder="xx.xx" required>
-                                <div class="login-text">Price</div>
-                            </label>
-
-                            <label class="smaller-container" id="drop-zone" style="cursor: pointer;">
-                                <input type="file" id="file-input" name="product_image" accept="image/*" hidden>
-                                <div class="login-text">Click to upload image</div>
-                                <div id="file-name" style="font-size: 10px; color: #666;"></div>
-                            </label>
-                        </div>
-
-                        <div class="dual-width-container">
-                            <button class="button" type="submit">
-                                <h3 style="color: white;">Add product</h3>
-                            </button>
-
-                            <button id="closemodal" class="button" type="button">
-                                <h3 style="color: white">Close</h3>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-            <div class="sub-content-container" style="margin-top: 20px;">
-                <div class="top-row">
-                    <div class="top-row-text">ID</div>
-                    <div class="top-row-text">Name</div>
-                    <div class="top-row-text">Price</div>
+                <div class="grid grid-cols-[50px_1fr_100px_120px] p-3 border-b border-white/10 text-gray-300 text-sm">
+                    <div>ID</div>
+                    <div>Name</div>
+                    <div>Price</div>
                 </div>
 
-            {% for item in items %}
-                <div class="user-row">
+                {% for item in items %}
+                <div class="grid grid-cols-[50px_1fr_100px_120px] items-center p-3 border-b border-white/10 hover:bg-white/5 transition">
+
                     <div>{{ item[0] }}</div>
                     <div>{{ item[1] }}</div>
-                    <div>{{ item[2] }}</div>
+                    <div>£{{ item[2] }}</div>
 
-                    <form method="POST" action="/delete_item" class="delete-form">
+                    <form method="POST" action="/delete_item">
                         <input type="hidden" name="ITEM_ID" value="{{ item[0] }}">
-                        <button class="button" type="submit">
-                            <h3 style="color: white;">Delete</h3>
+                        <button class="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded-md text-sm transition">
+                            Delete
                         </button>
                     </form>
                 </div>
-            {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>
+    <form method="POST" action="/additem" enctype="multipart/form-data">
+
+    <div id="modal"
+         class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-200 z-50">
+
+        <div class="bg-[#111111] border border-white/10 rounded-xl p-6 w-[30%] flex flex-col items-center">
+
+            <h1 class="text-xl font-bold mb-4 text-[#A4133C]">
+                Add a product
+            </h1>
+
+            <input type="text" name="product_name" placeholder="Product Name" required
+                class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+
+            <input type="text" name="price" placeholder="xx.xx" required
+                class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+
+            <input type="file" name="product_image"
+                class="w-full mb-4 text-sm">
+
+            <div class="flex gap-3">
+                <button type="submit"
+                    class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg">
+                    Add
+                </button>
+
+                <button type="button" id="closemodal"
+                    class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg">
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+    </form>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
