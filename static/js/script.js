@@ -102,31 +102,31 @@ setTimeout(() => {
 }, 3000);
 
 document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("openmodal");
-  const closeBtn = document.getElementById("closemodal");
-  const modal = document.getElementById("modal");
+  const openBtn = document.getElementById("openmodal1");
+  const closeBtn = document.getElementById("closemodal1");
+  const modal1 = document.getElementById("modal1");
 
-  if (!modal || !openBtn || !closeBtn) {
+  if (!modal1 || !openBtn || !closeBtn) {
     console.log("Modal elements missing");
     return;
   } 
 
   openBtn?.addEventListener("click", (e) => {
     e.preventDefault();
-    modal.classList.add("opacity-100", "pointer-events-auto");
-    modal.classList.remove("opacity-0", "pointer-events-none");
+    modal1.classList.add("opacity-100", "pointer-events-auto");
+    modal1.classList.remove("opacity-0", "pointer-events-none");
   });
 
   closeBtn?.addEventListener("click", () => {
-    modal.classList.add("opacity-0", "pointer-events-none");
-    modal.classList.remove("opacity-100", "pointer-events-auto");
+    modal1.classList.add("opacity-0", "pointer-events-none");
+    modal1.classList.remove("opacity-100", "pointer-events-auto");
   });
 
   // Optional: close modal when clicking outside inner
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.add("opacity-0", "pointer-events-none");
-      modal.classList.remove("opacity-100", "pointer-events-auto");
+  modal1.addEventListener("click", (e) => {
+    if (e.target === modal1) {
+      modal1.classList.add("opacity-0", "pointer-events-none");
+      modal1.classList.remove("opacity-100", "pointer-events-auto");
     }
   });
 
@@ -155,3 +155,27 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('/upload', { method: 'POST', body: formData });
   }
 });
+
+const openBtn2 = document.getElementById("openmodal2");
+const closeBtn2 = document.getElementById("closemodal2");
+const modal2 = document.getElementById("modal2");
+
+if (modal2 && openBtn2 && closeBtn2) {
+  openBtn2.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal2.classList.remove("opacity-0", "pointer-events-none");
+    modal2.classList.add("opacity-100", "pointer-events-auto");
+  });
+
+  closeBtn2.addEventListener("click", () => {
+    modal2.classList.add("opacity-0", "pointer-events-none");
+    modal2.classList.remove("opacity-100", "pointer-events-auto");
+  });
+
+  modal2.addEventListener("click", (e) => {
+    if (e.target === modal2) {
+      modal2.classList.add("opacity-0", "pointer-events-none");
+      modal2.classList.remove("opacity-100", "pointer-events-auto");
+    }
+  });
+}

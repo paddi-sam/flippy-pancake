@@ -25,11 +25,10 @@
 
             <div class="text-3xl mb-2">Flippy Staff Users</div>
 
-            <a href="{{ url_for('staff_register') }}">
-                <button class="bg-[#A4133C] hover:bg-[#c9184a] text-white rounded-lg py-2 px-4 transition-all">
-                    Add staff
-                </button>
-            </a>
+            <button id="openmodal2"
+                class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all" type="button">
+                Add Staff
+            </button>
 
             <h3 class="text-sm text-gray-400 mt-2">
                 Note: The first staff member cant be removed
@@ -67,7 +66,7 @@
 
             <div class="text-3xl mb-2">Flippy Product Records</div>
 
-            <button id="openmodal"
+            <button id="openmodal1"
                 class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all" type="button">
                 Add product
             </button>
@@ -104,39 +103,75 @@
     </div>
     <form method="POST" action="/additem" enctype="multipart/form-data">
 
-    <div id="modal"
-         class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-200 z-50">
-
-        <div class="bg-[#111111] border border-white/10 rounded-xl p-6 w-[30%] flex flex-col items-center">
-
-            <h1 class="text-xl font-bold mb-4 text-[#A4133C]">
-                Add a product
-            </h1>
-
-            <input type="text" name="product_name" placeholder="Product Name" required
-                class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
-
-            <input type="text" name="price" placeholder="xx.xx" required
-                class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
-
-            <input type="file" name="product_image"
-                class="w-full mb-4 text-sm">
-
-            <div class="flex gap-3">
-                <button type="submit"
-                    class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg">
-                    Add
-                </button>
-
-                <button type="button" id="closemodal"
-                    class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg">
-                    Close
-                </button>
+        <div id="modal1"
+             class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-200 z-50">
+        
+            <div class="bg-[#111111] border border-white/10 rounded-xl p-6 w-[30%] flex flex-col items-center">
+            
+                <h1 class="text-xl font-bold mb-4 text-[#A4133C]">
+                    Add a product
+                </h1>
+            
+                <input type="text" name="product_name" placeholder="Product Name" required
+                    class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+            
+                <input type="text" name="price" placeholder="xx.xx" required
+                    class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+            
+                <input type="file" name="product_image"
+                    class="w-full mb-4 text-sm">
+            
+                <div class="flex gap-3">
+                    <button type="submit"
+                        class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg">
+                        Add
+                    </button>
+                
+                    <button type="button" id="closemodal1"
+                        class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg">
+                        Close
+                    </button>
+                </div>
+            
             </div>
-
         </div>
-    </div>
     </form>
+    <form method="POST" action="/staffregister" enctype="multipart/form-data">
+
+        <div id="modal2"
+             class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-200 z-50">
+        
+            <div class="bg-[#111111] border border-white/10 rounded-xl p-6 w-[30%] flex flex-col items-center">
+            
+                <h1 class="text-xl font-bold mb-4 text-[#A4133C]">
+                    Add a product
+                </h1>
+            
+                <input type="text" name="staff_username" placeholder="Product Name" required
+                    class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+            
+                <input type="text" name="staff_password" placeholder="xx.xx" required
+                    class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+            
+                <input type="text" name="confirm_password" placeholder="xx.xx" required
+                    class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+            
+                <div class="flex gap-3">
+                    <button type="submit"
+                        class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg">
+                        Add
+                    </button>
+                
+                    <button type="button" id="closemodal2"
+                        class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg">
+                        Close
+                    </button>
+                </div>
+            
+            </div>
+        </div>
+    </form>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
