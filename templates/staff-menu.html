@@ -6,7 +6,21 @@
     <title>Staff Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}">
 </head>
-<body class="bg-[#1A1A1A] text-white min-h-screen">
+<body class="bg-[#1A1A1A] text-white min-h-screen relative">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="fixed top-5 inset-x-0 flex justify-center z-50">
+                <div class="flex flex-col items-center space-y-2">
+                    {% for message in messages %}
+                        <div class="bg-red-600 text-white px-4 py-2 rounded shadow">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+        {% endif %}
+    {% endwith %}
 
     <a href="{{ url_for('index') }}" class="absolute top-4 left-4 hover:scale-105 transition-transform bg-white/20 p-3 rounded-2xl">
         <img src="{{ url_for('static', filename='images/icons/arrow-left.png') }}" class="w-20 h-20">
@@ -26,7 +40,7 @@
             <div class="text-3xl mb-2">Flippy Staff Users</div>
 
             <button id="openmodal2"
-                class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all" type="button">
+                class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all cursor-pointer" type="button">
                 Add Staff
             </button>
 
@@ -52,7 +66,7 @@
                     {% else %}
                         <form method="POST" action="/delete_staff">
                             <input type="hidden" name="user_id" value="{{ user[0] }}">
-                            <button class="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded-md text-sm transition">
+                            <button class="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded-md text-sm transition cursor-pointer">
                                 Delete
                             </button>
                         </form>
@@ -67,7 +81,7 @@
             <div class="text-3xl mb-2">Flippy Product Records</div>
 
             <button id="openmodal1"
-                class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all" type="button">
+                class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all cursor-pointer" type="button">
                 Add product
             </button>
 
@@ -92,7 +106,7 @@
 
                     <form method="POST" action="/delete_item">
                         <input type="hidden" name="ITEM_ID" value="{{ item[0] }}">
-                        <button class="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded-md text-sm transition">
+                        <button class="bg-black hover:bg-gray-800 text-white px-3 py-1 rounded-md text-sm transition cursor-pointer">
                             Delete
                         </button>
                     </form>
@@ -123,12 +137,12 @@
             
                 <div class="flex gap-3">
                     <button type="submit"
-                        class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg">
+                        class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg cursor-pointer">
                         Add
                     </button>
                 
                     <button type="button" id="closemodal1"
-                        class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg">
+                        class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg cursor-pointer">
                         Close
                     </button>
                 </div>
@@ -144,30 +158,29 @@
             <div class="bg-[#111111] border border-white/10 rounded-xl p-6 w-[30%] flex flex-col items-center">
             
                 <h1 class="text-xl font-bold mb-4 text-[#A4133C]">
-                    Add a product
+                    Add staff to Database
                 </h1>
             
-                <input type="text" name="staff_username" placeholder="Product Name" required
+                <input type="text" name="username" placeholder="Staff username" required
                     class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
             
-                <input type="text" name="staff_password" placeholder="xx.xx" required
+                <input type="text" name="password" placeholder="Password" required
                     class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
             
-                <input type="text" name="confirm_password" placeholder="xx.xx" required
+                <input type="text" name="confirm_password" placeholder="Confirm Password" required
                     class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
             
                 <div class="flex gap-3">
                     <button type="submit"
-                        class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg">
+                        class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg cursor-pointer">
                         Add
                     </button>
                 
                     <button type="button" id="closemodal2"
-                        class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg">
+                        class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg cursor-pointer">
                         Close
                     </button>
                 </div>
-            
             </div>
         </div>
     </form>

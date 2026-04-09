@@ -190,15 +190,15 @@ def staff_register():
 
         if not staff_username or not staff_password or not confirm_password:
             flash('All fields are required!')
-            return render_template('staffregister.html')
+            return redirect(url_for('staff_menu'))
 
         if staff_password != confirm_password:
             flash('Passwords do not match!')
-            return render_template('staffregister.html')
+            return redirect(url_for('staff_menu'))
 
         if len(staff_password) < 8:
             flash("Password too short!")
-            return render_template('staffregister.html')
+            return redirect(url_for('staff_menu'))
 
         num_count = 0
         for i in staff_password:
@@ -206,7 +206,7 @@ def staff_register():
                 num_count += 1
         if num_count < 3:
             flash("Password needs to have 3 numbers!")
-            return render_template('staffregister.html')
+            return redirect(url_for('staff_menu'))
 
         special_chars = set("!@#$%^&*()-_=+[]{};:'\",.<>/?\\|")
         special_count = 0
@@ -215,7 +215,7 @@ def staff_register():
                 special_count += 1
         if special_count < 1:
             flash("Password must contain a special character")
-            return render_template('register.html')
+            return redirect(url_for('staff_menu'))
 
         connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
@@ -225,8 +225,7 @@ def staff_register():
         if existing_user:
             connection.close()
             flash('Username already taken!')
-            return render_template('staffregister.html')
-
+            return redirect(url_for('staff_menu'))
         hashed_password = ph.hash(staff_password)
         cursor.execute('INSERT INTO staff (username, password) VALUES (?, ?)', (staff_username, hashed_password))
         connection.commit()
@@ -235,7 +234,6 @@ def staff_register():
         flash('Staff added')
         return redirect(url_for('staff_menu'))
 
-    return render_template('staffregister.html')
 
 @app.route('/delete_staff', methods=['POST'])
 def delete_staff():
