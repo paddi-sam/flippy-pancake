@@ -64,15 +64,14 @@ if (animElements.length > 0) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-        observer.unobserve(entry.target);
+        entry.target.classList.remove("opacity-0", "-translate-x-[1200px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0 });
 
   animElements.forEach(el => observer.observe(el));
 }
-
 
 const acc_button = document.getElementById("account-button");
 const dropdown = document.querySelector(".account-drop-down");
