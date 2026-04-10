@@ -13,7 +13,7 @@ function updateCarousel() {
     
     slides.forEach((slide, i) => {
         slide.style.transition = 'all 0.3s';
-        slide.style.top = '50%';
+        slide.style.top = '60%';
 
         let offset = i - index;
         if (offset > total / 2) offset -= total;
