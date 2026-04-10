@@ -2,7 +2,6 @@
   <head>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/app-ico.png') }}">
     <title>Flippy pancakes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}">
   </head>
   <body class="bg-[#1A1A1A]">
@@ -22,9 +21,9 @@
       <div class="italic mt-4 text-white">Making Pancakes since 1995</div>
 
       <div class="w-1/3 h-1/3 flex flex-row justify-center mt-5 mb-2">
-        <div class="mx-2.5 font-bold cursor-pointer text-white">Deals and Specials</div>
-        <div class="mx-2.5 font-bold cursor-pointer text-white">Build your Own Stack</div>
-        <div class="mx-2.5 font-bold cursor-pointer text-white">Why Choose Us</div>
+        <div class="mx-2.5 font-bold cursor-pointer text-white"><a href="#gallery">Deals and Specials</a></div>
+        <div class="mx-2.5 font-bold cursor-pointer text-white"><a href="#build-stack">Build your own Stack</a></div>
+        <div class="mx-2.5 font-bold cursor-pointer text-white"><a href="#why-choose-us">Why choose us</a></div>
       </div>
 
       <div class="w-75 absolute right-5 top-12.5 flex flex-col items-end">
@@ -34,43 +33,39 @@
           <img class="w-20 h-auto" src="{{ url_for('static', filename='images/icons/burger.png') }}">
         </div>
       
-        <div class="account-drop-down opacity-0 -translate-y-10 pointer-events-none transition-all duration-300 mt-10">
+        <div class="account-drop-down opacity-0 -translate-y-10 pointer-events-none transition-all duration-200 mt-10">
         
           {% if session.get('staff') %}
         
             <div class="flex justify-center w-full h-23.75 rounded-2xl bg-gray-600 mb-4" id="drop-down-element">
-              <div class="acctext">
-                Logged in as: {{ session['staff-username'] }}
-              </div>
+                <div class="flex text-[40px] items-center text-center font-bold text-white">Logged in as: {{ session['staff-username'] }}</div>
             </div>
           
             <a href="{{ url_for('staff_menu') }}">
-              <div class="drop-down-element">
-                <div class="acctext">Staff Menu</div>
+              <div class="flex justify-center w-full h-23.75 rounded-2xl bg-gray-600 mb-4 p-3" id="drop-down-element">
+                <div class="flex text-[40px] items-center text-center font-bold text-white">Staff menu</div>
               </div>
             </a>
           
             <a href="{{ url_for('logout') }}">
-              <div class="drop-down-element">
-                <div class="acctext">Logout</div>
+              <div class="flex justify-center w-full h-23.75 rounded-2xl bg-gray-600 mb-4 p-3" id="drop-down-element">
+                <div class="flex text-[40px] items-center text-center font-bold text-white">Logout</div>
               </div>
             </a>
           
           {% elif session.get('username') %}
           
-            <div class="drop-down-element">
-              <div class="acctext">
-                Logged in as {{ session['username'] }}
-              </div>
+            <div class="flex justify-center w-full h-23.75 rounded-2xl bg-gray-600 mb-4 p-3" id="drop-down-element">
+                <div class="flex text-[40px] items-center text-center font-bold text-white">Logged in as {{ session['username'] }}</div>
             </div>
           
             <div class="drop-down-element">
-              <div class="acctext">Orders</div>
+              <div class="flex text-[40px] items-center text-center font-bold text-white">Orders</div>
             </div>
           
             <a href="{{ url_for('logout') }}">
-              <div class="drop-down-element">
-                <div class="acctext">Logout</div>
+              <div class="flex justify-center w-full h-23.75 rounded-2xl bg-gray-600 mb-4 p-3" id="drop-down-element">
+                <div class="flex text-[40px] items-center text-center font-bold text-white">Logout</div>
               </div>
             </a>
           
@@ -97,153 +92,40 @@
           {% endif %}
           
         </div>
-
-    <!--
-      <div class="account-container">
-      
-        <div class="account-icons" id="account-button">
-          <img src="{{ url_for('static', filename='images/icons/account-pfp.png') }}">
-          <img src="{{ url_for('static', filename='images/icons/burger-menu-icon.png') }}">
-        </div>
-      
-        <div class="account-drop-down slide-down">
-        
-          {% if session.get('staff') %}
-            <div class="drop-down-element">
-                <div class="acctext">
-                    Logged in as: {{ session['staff-username'] }}
-                </div>
-            </div>
-            <a href="{{ url_for('staff_menu') }}">
-              <div class="drop-down-element">
-                  <div class="acctext">Staff Menu</div>
-              </div>
-            </a>
-            <a href="{{ url_for('logout') }}">
-              <div class="drop-down-element">
-                  <div class="acctext">Logout</div>
-              </div>
-            </a>
-          {% elif session.get('username') %}
-
-            <div class="drop-down-element">
-                <div class="acctext">
-                    Logged in as {{ session['username'] }}
-                </div>
-            </div>
-          
-            <div class="drop-down-element">
-                <div class="acctext">Orders</div>
-            </div>
-          
-            <a href="{{ url_for('logout') }}">
-              <div class="drop-down-element">
-                  <div class="acctext">Logout</div>
-              </div>
-            </a>
-          {% else %}
-            <a href="{{ url_for('login') }}">
-              <div class="drop-down-element">
-                  <div class="acctext">Login</div>
-              </div>
-            </a>  
-
-            <a href="{{ url_for('stafflogin') }}">
-              <div class="drop-down-element">
-                  <div class="acctext">Staff Login</div>
-              </div>
-            </a>  
-          
-            <a href="{{ url_for('register') }}">
-              <div class="drop-down-element">
-                  <div class="acctext">Register</div>
-              </div>
-            </a>
-          {% endif %}
-          
-        </div>
-      
-      </div>
-
-      <div class="top-links">
-        <div class="top-links-item"><a href="#gallery">Deals and Specials</a></div>
-        <div class="top-links-item"><a href="#build-stack">Build your own Stack</a></div>
-        <div class="top-links-item"><a href="#why-choose-us">Why choose us</a></div>
-        <div class="top-links-item">Account</div>
-      </div>
-    </div> -->
-    
-    <!-- <div class="gallery-container" id = "gallery">
-      <div class="gallery-item gallery-item-1" data-index="1">
-        <img src="{{ url_for('static', filename='images/berries-cream.jpg') }}">
-        <div class="slide-text">
-          <h3>Berries & Cream</h3>
-          <p>Fresh forest berries with whipped cream</p>
-          <p>$5.49</p>
-        </div>
-        <div class="add-basket-button-container">
-          <div class="add-button">+</div>
-        </div>
-      </div>
-
-      <div class="gallery-item gallery-item-2" data-index="2">
-        <img src="{{ url_for('static', filename='images/Chocolate-pancakes.jpg') }}">
-        <div class="slide-text">
-          <h3>Chocolate Stack</h3>
-          <p>Cocoa pancakes with chocolatey sauce</p>
-          <p>$6.99</p>
-        </div>
-        <div class="add-basket-button-container">
-          <div class="add-button">+</div>          
-        </div>
-      </div>
-    
-      <div class="gallery-item gallery-item-3" data-index="3">
-        <img src="{{ url_for('static', filename='images/lemon-pancakes.jpg') }}">
-        <div class="slide-text">
-          <h3>Lemon and syrup</h3>
-          <p>Delicious blend of sour and sweet</p>
-          <p>$6.49</p>
-        </div>
-        <div class="add-basket-button-container">
-          <div class="add-button">+</div>
-        </div>        
-      </div>
-
-      <div class="gallery-item gallery-item-4" data-index="4">
-        <img src="{{ url_for('static', filename='images/strawberry-pancakes.jpg') }}">
-        <div class="slide-text">
-          <h3>Strawberrys n' Sauce</h3>
-          <p>all the strawberries you could want</p>
-          <p>$7.49</p>
-        </div>
-        <div class="add-basket-button-container">
-          <div class="add-button">+</div>
-        </div>        
-      </div>
-    
-      <div class="gallery-item gallery-item-5" data-index="5">
-        <img src="{{ url_for('static', filename='images/glutenfree-stack.jpg') }}">
-        <div class="slide-text">
-          <h3>Gluten free</h3>
-          <p>So noone feels left out</p>
-          <p>$6.49</p>
-        </div>
-        <div class="add-basket-button-container">
-          <div class="add-button">+</div>
-        </div>       
       </div>
     </div>
-    <div class="gallery-controls"></div>
 
-    <a href="{{ url_for('menu') }}">
-      <div class="more-products-container">
-        More products
-      </div>
-    </a>
+    <div class="w-full max-w-6xl mx-auto relative py-10 mt-32">
+      <div id="track" class="relative w-full h-[400px]">
+
+        <div class="carousel-slide absolute w-[60%] md:w-[45%] lg:w-[35%] h-full overflow-hidden rounded-2xl shadow-xl">
+          <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/berries-cream.jpg') }}">
+          <div class="absolute bottom-0 w-full bg-[#2A2A2A]/90 py-1 text-center">
+            <span class="text-white text-xl">Fresh forest berries and whipped cream | $5.49</span>
+          </div>
+        </div>
       
-
-    <div class="byos-container" id ="build-stack">
+        <div class="carousel-slide absolute w-[60%] md:w-[45%] lg:w-[35%] h-full overflow-hidden rounded-2xl shadow-xl">
+            <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/Chocolate-pancakes.jpg') }}">
+            <div class="absolute bottom-0 w-full bg-[#2A2A2A]/90 py-1 text-center">
+              <span class="text-white text-2xl font-bold">$6.99</span>
+            </div>
+          </div>
+        
+          <div class="carousel-slide absolute w-[60%] md:w-[45%] lg:w-[35%] h-full overflow-hidden rounded-2xl shadow-xl">
+            <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/lemon-pancakes.jpg') }}">
+            <div class="absolute bottom-0 w-full bg-[#2A2A2A]/90 py-1 text-center">
+              <span class="text-white text-2xl font-bold">$6.49</span>
+            </div>
+          </div>
+      </div>
+    
+      <div class="flex justify-center gap-6 mt-8 relative z-30">
+        <button id="prev" class="text-white font-bold bg-[#2A2A2A] px-6 py-2 rounded-lg hover:bg-[#A4133C] cursor-pointer transition">Prev</button>
+        <button id="next" class="text-white font-bold bg-[#2A2A2A] px-6 py-2 rounded-lg hover:bg-[#A4133C] cursor-pointer transition">Next</button>
+      </div>
+    </div>
+    <!--<div class="byos-container" id ="build-stack">
 
 
       <img src="{{ url_for('static', filename='images/icons/build-your-own-stack.jpg') }}" class="byos-image" alt="Build your own stack">

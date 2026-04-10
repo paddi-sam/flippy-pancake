@@ -1,85 +1,61 @@
 console.log("JS is loaded");
 
-const galleryContainer = document.querySelector('.gallery-container');
-const galleryControlsContainer = document.querySelector('.gallery-controls');
-const galleryControls = ['previous', 'next'];
-const galleryItems = document.querySelectorAll('.gallery-item');
-class Carousel {
-  constructor(container, items, controls) {
-    this.carouselContainer = container;
-    this.carouselControls = controls;
-    this.carouselArray = [...items];
-  }
+const track = document.getElementById("track");
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
 
-  updateGallery() {
-    this.carouselArray.forEach(el => {
-      el.classList.remove(
-        'gallery-item-1',
-        'gallery-item-2',
-        'gallery-item-3',
-        'gallery-item-4',
-        'gallery-item-5'
-      );
+let index = 0;
+
+function updateCarousel() {
+    if (!track) return;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const total = slides.length;
+    
+    slides.forEach((slide, i) => {
+        slide.style.transition = 'all 0.3s';
+        slide.style.top = '50%';
+
+        let offset = i - index;
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        if (offset === 0) {
+            slide.style.left = '50%';
+            slide.style.transform = 'translate(-50%, -50%) scale(1)';
+            slide.style.zIndex = '30';
+            slide.style.opacity = '1';
+        } else if (Math.round(offset) === -1) {
+          //left
+            slide.style.left = '25%';
+            slide.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            slide.style.zIndex = '20';
+            slide.style.opacity = '0.4';
+        } else if (Math.round(offset) === 1) {
+          //right
+            slide.style.left = '75%';
+            slide.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            slide.style.zIndex = '20';
+            slide.style.opacity = '0.4';
+        } else {
+            slide.style.left = '50%';
+            slide.style.transform = 'translate(-50%, -50%) scale(0.5)';
+            slide.style.zIndex = '10';
+            slide.style.opacity = '0';
+        }
     });
-
-    this.carouselArray.slice(0, 5).forEach((el, i) => {
-      el.classList.add(`gallery-item-${i + 1}`);
-    });
-  }
-
-  setCurrentState(direction) {
-    if (direction.classList.contains('gallery-controls-previous')) {
-      this.carouselArray.unshift(this.carouselArray.pop());
-    } else {
-      this.carouselArray.push(this.carouselArray.shift());
-    }
-    this.updateGallery();
-  }
-
-  setControls() {
-    this.carouselControls.forEach(control => {
-      const btn = document.createElement('button');
-      btn.className = `gallery-controls-${control}`;
-      btn.innerText = control;
-      galleryControlsContainer.appendChild(btn);
-    });
-  }
-
-  useControls() {
-    const triggers = [...galleryControlsContainer.childNodes];
-
-    triggers.forEach(control => {
-      control.addEventListener('click', e => {
-        e.preventDefault();
-        this.setCurrentState(control);
-      });
-    });
-  }
-
-  useKeyboard() {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        const prevButton = document.querySelector('.gallery-controls-previous');
-        if (prevButton) this.setCurrentState(prevButton);
-      }
-      if (e.key === 'ArrowRight') {
-        const nextButton = document.querySelector('.gallery-controls-next');
-        if (nextButton) this.setCurrentState(nextButton);
-      }
-    });
-  }
 }
 
-if (galleryContainer && galleryControlsContainer && galleryItems.length > 0) {
-  const exampleCarousel = new Carousel(
-    galleryContainer,
-    galleryItems,
-    galleryControls
-  );
-
-  exampleCarousel.setControls();
-  exampleCarousel.useControls();
-  exampleCarousel.useKeyboard();
+if (track && nextBtn && prevBtn) {
+    nextBtn.addEventListener("click", () => {
+        index = (index + 1) % document.querySelectorAll('.carousel-slide').length;
+        updateCarousel();
+    });
+    prevBtn.addEventListener("click", () => {
+        const total = document.querySelectorAll('.carousel-slide').length;
+        index = (index - 1 + total) % total;
+        updateCarousel();
+    });
+    updateCarousel();
 }
 
 const animElements = document.querySelectorAll('.slide-in-left');
@@ -96,6 +72,7 @@ if (animElements.length > 0) {
 
   animElements.forEach(el => observer.observe(el));
 }
+
 
 const acc_button = document.getElementById("account-button");
 const dropdown = document.querySelector(".account-drop-down");
@@ -116,7 +93,6 @@ if (acc_button && dropdown) {
     dropdown.classList.toggle("pointer-events-auto", dropdownOpen);
   });
 
-  // close on outside click
   document.addEventListener("click", (e) => {
     if (!dropdown.contains(e.target) && !acc_button.contains(e.target)) {
       dropdownOpen = false;
@@ -136,6 +112,7 @@ if (acc_button && dropdown) {
   });
 }
 
+
 setTimeout(() => {
   document.querySelectorAll('.flash-message-welcome').forEach(el => {
     el.classList.add('fade-out');
@@ -143,63 +120,59 @@ setTimeout(() => {
   });
 }, 3000);
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openmodal1");
   const closeBtn = document.getElementById("closemodal1");
   const modal1 = document.getElementById("modal1");
 
-  if (!modal1 || !openBtn || !closeBtn) {
-    console.log("Modal elements missing");
-    return;
-  }
-
-  openBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    modal1.classList.add("opacity-100", "pointer-events-auto");
-    modal1.classList.remove("opacity-0", "pointer-events-none");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    modal1.classList.add("opacity-0", "pointer-events-none");
-    modal1.classList.remove("opacity-100", "pointer-events-auto");
-  });
-
-  modal1.addEventListener("click", (e) => {
-    if (e.target === modal1) {
-      modal1.classList.add("opacity-0", "pointer-events-none");
-      modal1.classList.remove("opacity-100", "pointer-events-auto");
-    }
-  });
-
-  const dropZone = document.getElementById('drop-zone');
-  const fileInput = document.getElementById('file-input');
-  const fileNameDisplay = document.getElementById('file-name');
-
-  if (dropZone && fileInput && fileNameDisplay) {
-    dropZone.addEventListener('click', () => fileInput.click());
-
-    dropZone.addEventListener('dragover', (e) => e.preventDefault());
-
-    dropZone.addEventListener('drop', (e) => {
+  if (modal1 && openBtn && closeBtn) {
+    openBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      handleFile(e.dataTransfer.files[0]);
+
+      modal1.classList.add("opacity-100", "pointer-events-auto");
+      modal1.classList.remove("opacity-0", "pointer-events-none");
     });
 
-    fileInput.addEventListener('change', () =>
-      handleFile(fileInput.files[0])
-    );
+    closeBtn.addEventListener("click", () => {
+      modal1.classList.add("opacity-0", "pointer-events-none");
+      modal1.classList.remove("opacity-100", "pointer-events-auto");
+    });
 
-    function handleFile(file) {
-      if (!file) return;
+    modal1.addEventListener("click", (e) => {
+      if (e.target === modal1) {
+        modal1.classList.add("opacity-0", "pointer-events-none");
+        modal1.classList.remove("opacity-100", "pointer-events-auto");
+      }
+    });
 
-      fileNameDisplay.textContent = file.name;
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const fileNameDisplay = document.getElementById('file-name');
 
-      const formData = new FormData();
-      formData.append('image', file);
+    if (dropZone && fileInput && fileNameDisplay) {
+      dropZone.addEventListener('click', () => fileInput.click());
 
-      fetch('/upload', { method: 'POST', body: formData });
+      dropZone.addEventListener('dragover', (e) => e.preventDefault());
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        handleFile(e.dataTransfer.files[0]);
+      });
+
+      fileInput.addEventListener('change', () =>
+        handleFile(fileInput.files[0])
+      );
+
+      function handleFile(file) {
+        if (!file) return;
+
+        fileNameDisplay.textContent = file.name;
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        fetch('/upload', { method: 'POST', body: formData });
+      }
     }
   }
 });
