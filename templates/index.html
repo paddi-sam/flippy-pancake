@@ -147,7 +147,10 @@
         <div class="w-1/2 h-auto flex flex-col items-center text-center justify-center">
           <div class="mt-3 font-bold text-3xl text-white">More products</div>
           <div class="text-4xl text-white">-</div>
-          <div class="text-2xl text-white font-semibold mt-5">The best of what flippy has to offer</div>
+          <div class="text-2xl text-white font-semibold mt-5">The best of what flippy has to offer:</div>
+          <div class="text-2xl text-white font-semibold mt-5">Pancakes</div>
+          <div class="text-2xl text-white font-semibold">Waffles</div>
+          <div class="text-2xl text-white font-semibold">Sweet treats</div>
 
           {% if session.get('username') or session.get('staff') %}
             <a href="{{ url_for('menu') }}"> 

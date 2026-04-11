@@ -4,6 +4,7 @@ from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 import os
 from werkzeug.utils import secure_filename
+from PIL import Image
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
@@ -281,12 +282,28 @@ def add_item():
         file = request.files.get('product_image')
         filename = "default.png"
 
+        UPLOAD_FOLDER = 'static/images'
+
         if file and file.filename != '':
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                img = Image.open(file)
+
+                w,h = img.size
+
+                left = (w // 2) - 360
+                right = (w // 2) + 360
+
+
+                top = (h // 2) - 640
+                bottom = (h // 2) + 640
+
+                cropped = img.crop((left, top, right, bottom))
+
+                filename = secure_filename(file.filename)   
+                filepath=os.path.join(UPLOAD_FOLDER, filename)
+                cropped.save(filepath)
 
         cursor.execute('INSERT INTO items (NAME, PRICE, IMAGE) VALUES (?, ?, ?)',
-                           (product_name, product_price, filename))
+                           (product_name, product_price, filepath))
 
         connection.commit()
         connection.close()
