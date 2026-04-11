@@ -1,10 +1,16 @@
+## Requirements
+
+This project uses Tailwind and thus requires node.js and npm to be installed. They can be found: [Here](https://nodejs.org/en/download)
+
+From there get started with Tailwind [Here](https://tailwindcss.com/docs/installation/tailwind-cli)
+
+And when ready run npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --watch
+
+This project also uses Flask and requires python and pip to be installed to use it. They can be found: [Here](https://www.python.org/downloads/)
+
 ## To run
 
-Requires python and Flask to be installed, run app.py and ctrl+click on the localhost link in the terminal
-
-## Database
-
-To interact with user login and register features, first [Initialise Database](init-db.py) and run it, then run [App.py](app.py) and navigate to login and register features and they should work
+First, open [Initialise Database](init-db.py), from there go to [App](app.py) and click the localhost it gives when you run
 
 ## Asset Disclaimer
 
