@@ -46,15 +46,30 @@ function updateCarousel() {
 }
 
 if (track && nextBtn && prevBtn) {
-    nextBtn.addEventListener("click", () => {
-        index = (index + 1) % document.querySelectorAll('.carousel-slide').length;
+    const slides = document.querySelectorAll('.carousel-slide');
+
+    function goNext() {
+        index = (index + 1) % slides.length;
         updateCarousel();
-    });
-    prevBtn.addEventListener("click", () => {
-        const total = document.querySelectorAll('.carousel-slide').length;
-        index = (index - 1 + total) % total;
+    }
+
+    function goPrev() {
+        index = (index - 1 + slides.length) % slides.length;
         updateCarousel();
+    }
+
+    nextBtn.addEventListener("click", goNext);
+    prevBtn.addEventListener("click", goPrev);
+
+    // Arrow key support
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+            goNext();
+        } else if (e.key === "ArrowLeft") {
+            goPrev();
+        }
     });
+
     updateCarousel();
 }
 
