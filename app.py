@@ -17,7 +17,14 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT NAME, PRICE, IMAGE FROM items')
+    products = cursor.fetchall()
+
+    return render_template('index.html', items = products)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -279,6 +286,8 @@ def add_item():
         product_name = request.form.get('product_name')
         product_price = request.form.get('price')
 
+        formatted_file_name = product_name.replace(" ", "-")
+
         file = request.files.get('product_image')
         filename = "default.png"
 
@@ -292,13 +301,12 @@ def add_item():
                 left = (w // 2) - 360
                 right = (w // 2) + 360
 
-
                 top = (h // 2) - 640
                 bottom = (h // 2) + 640
 
                 cropped = img.crop((left, top, right, bottom))
 
-                filename = secure_filename(file.filename)   
+                filename = secure_filename(formatted_file_name)  + ".png"
                 filepath=os.path.join(UPLOAD_FOLDER, filename)
                 cropped.save(filepath)
 

@@ -3,7 +3,8 @@
   <head>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/app-ico.png') }}">
     <title>Flippy pancakes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/output.css') }}">
+    <link rel="preload" href="{{ url_for('static', filename='css/output.css') }}" as="style">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
   </head>
   <body class="bg-[#1A1A1A] w-full">
 
@@ -85,34 +86,20 @@
 
     <div class="w-full max-w-6xl mx-auto relative py-10 mt-32">
       <div id="track" class="relative w-full h-[400px]">
-        <div class="carousel-slide absolute w-[60%] md:w-[45%] lg:w-[35%] h-full overflow-hidden rounded-2xl shadow-xl">
-          <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/berries-cream.jpg') }}">
-          <div class="absolute bottom-0 w-full bg-[#2A2A2A]/90 py-1 text-center">
-            <span class="text-white text-xl">Fresh forest berries and whipped cream | $5.49</span>
-          </div>
-        </div>
-      
-        <div class="carousel-slide absolute w-[60%] md:w-[45%] lg:w-[35%] h-full overflow-hidden rounded-2xl shadow-xl">
-            <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/Chocolate-pancakes.jpg') }}">
-            <div class="absolute bottom-0 w-full bg-[#2A2A2A]/90 py-1 text-center">
-              <span class="text-white text-2xl font-bold">$6.99</span>
-            </div>
-          </div>
-        
+        {% for item in items %}
           <div class="carousel-slide absolute w-[60%] md:w-[45%] lg:w-[35%] h-full overflow-hidden rounded-2xl shadow-xl">
-            <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/lemon-pancakes.jpg') }}">
+            <img class="w-full h-full object-cover" src="{{item[2]}}">
             <div class="absolute bottom-0 w-full bg-[#2A2A2A]/90 py-1 text-center">
-              <span class="text-white text-2xl font-bold">$6.49</span>
+              <span class="text-white text-xl">{{ item[0] }} | £{{ item[1] }}</span>
             </div>
           </div>
+        {% endfor %}
       </div>
-    
-      <div class="flex justify-center gap-6 mt-13 relative z-30">
-        <button id="prev" class="text-white font-bold bg-[#2A2A2A] px-6 py-2 rounded-lg hover:bg-[#A4133C] cursor-pointer transition">Prev</button>
-        <button id="next" class="text-white font-bold bg-[#2A2A2A] px-6 py-2 rounded-lg hover:bg-[#A4133C] cursor-pointer transition">Next</button>
-      </div>
+        <div class="flex justify-center gap-6 mt-13 relative z-30">
+          <button id="prev" class="text-white font-bold bg-[#2A2A2A] px-6 py-2 rounded-lg hover:bg-[#A4133C] cursor-pointer transition">Prev</button>
+          <button id="next" class="text-white font-bold bg-[#2A2A2A] px-6 py-2 rounded-lg hover:bg-[#A4133C] cursor-pointer transition">Next</button>
+        </div>
     </div>
-
 
     <div class="flex flex-row items-center justify-center w-full h-auto mt-10">
 
