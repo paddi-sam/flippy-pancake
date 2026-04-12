@@ -320,7 +320,13 @@ def add_item():
 
 @app.route('/account')
 def account():
-    return render_template('account.html')
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+    
+    username = session.get("username")
+    
+    return render_template('account.html', 
+                           username = username)
 
 if __name__ == '__main__':
     app.run(debug=True)

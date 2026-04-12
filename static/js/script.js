@@ -134,6 +134,35 @@ setTimeout(() => {
   });
 }, 3000);
 
+function setupFileUpload({ dropZone, fileInput, fileNameDisplay }) {
+  if (!dropZone || !fileInput || !fileNameDisplay) return;
+
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  dropZone.addEventListener('dragover', (e) => e.preventDefault());
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    handleFile(e.dataTransfer.files[0]);
+  });
+
+  fileInput.addEventListener('change', () =>
+    handleFile(fileInput.files[0])
+  );
+
+  function handleFile(file) {
+    if (!file) return;
+
+    fileNameDisplay.textContent = file.name;
+
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    fetch('/upload', { method: 'POST', body: formData });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openmodal1");
   const closeBtn = document.getElementById("closemodal1");
@@ -159,35 +188,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file-input');
-    const fileNameDisplay = document.getElementById('file-name');
+    const dropZone = modal1.querySelector('#upload-box');
+    const fileInput = modal1.querySelector('.file-input');
+    const fileNameDisplay = modal1.querySelector('#file-name');
 
-    if (dropZone && fileInput && fileNameDisplay) {
-      dropZone.addEventListener('click', () => fileInput.click());
-
-      dropZone.addEventListener('dragover', (e) => e.preventDefault());
-
-      dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        handleFile(e.dataTransfer.files[0]);
-      });
-
-      fileInput.addEventListener('change', () =>
-        handleFile(fileInput.files[0])
-      );
-
-      function handleFile(file) {
-        if (!file) return;
-
-        fileNameDisplay.textContent = file.name;
-
-        const formData = new FormData();
-        formData.append('image', file);
-
-        fetch('/upload', { method: 'POST', body: formData });
-      }
-    }
+    setupFileUpload({ dropZone, fileInput, fileNameDisplay });
   }
 });
 

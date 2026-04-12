@@ -8,28 +8,94 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
 </head>
 <body class="bg-[#1A1A1A] flex flex-col items-center">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message-welcome">
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     <div class="w-full h-auto bg-[#242424] flex flex-col text-center">
         <div class="text-7xl text-white p-5 font-bold">Account</div>
     </div>
 
-    <div class="w-64 h-64 bg-white my-10">
+    <div class="w-64 h-64 bg-white mt-10 rounded-full">
         Profile pic here
     </div>
 
-    <div class="w-64 h-auto bg-white mb-10">
-        USERNAME
+    <div id="modal1"
+         class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-200 z-50">
+    
+        <div class="bg-[#111111] border border-white/10 rounded-xl p-6 w-[30%] flex flex-col items-center mb-10">
+        
+            <h1 class="text-xl font-bold mb-4 text-[#A4133C]">
+                Change Avatar
+            </h1>
+        
+            <label id="upload-box" class="drop-zone flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer transition hover:bg-gray-800 mb-10">
+
+              <span id="upload-text" class="text-white text-xl">
+                Drag & Drop or Click to Upload
+              </span>
+          
+              <span id="file-name" class="text-sm text-gray-300 mt-2">
+                No file selected
+              </span>
+          
+              <input type="file" name="product_image" class="file-input hidden">
+            </label>
+
+            <div class="flex gap-3">
+                <button type="submit"
+                    class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg cursor-pointer text-white">
+                    Add
+                </button>
+            
+                <button type="button" id="closemodal1"
+                    class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg cursor-pointer text-white">
+                    Close
+                </button>
+            </div>
+        
+        </div>
     </div>
 
-    <div class="w-[512px] h-[256px] bg-white">
+    <button id="openmodal1"
+        class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all cursor-pointer my-4" type="button">
+        Change Avatar
+    </button>
+
+    <div class="w-64 h-auto bg-[#242424] mb-10 p-2 text-center rounded-xl">
+        <div class="text-5xl font-semibold text-white">
+            {{ username }}
+        </div>
+    </div>
+
+    <div class="w-[512px] h-[256px] bg-[#242424] rounded-2xl">
         info here
     </div>
 
-    <div class="w-[512px] h-[256px] bg-white mt-10">
+    <div class="w-[512px] h-[256px] bg-[#242424] mt-10 rounded-2xl">
         allergy info here
     </div>
 
-    <div class="w-256px h-auto bg-white mt-10">
-        logout and delete account
+    <div class="w-auto h-auto flex flex-row mb-20">
+        <div class="w-auto h-auto mt-10 bg-[#A4133C] hover:bg-[#c9184a] p-4 rounded-2xl cursor-pointer mx-2 duration-200">
+            <div class="font-bold text-white">Delete Account</div>
+        </div>
+        <div class="border-[#A4133C] border-2 w-auto h-auto mt-10 hover:bg-[#A4133C] p-4 rounded-2xl cursor-pointer mx-2 duration-200">
+            <div class="font-bold text-white">Logout</div>
+        </div>
     </div>
+
+    <a href="{{ url_for('index') }}" class="absolute top-4 left-4 hover:scale-105 transition-transform bg-white/20 p-3 rounded-2xl">
+        <img src="{{ url_for('static', filename='images/icons/arrow-left.png') }}" class="w-20 h-10 object-cover">
+        Back to home
+    </a>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
