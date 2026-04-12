@@ -103,8 +103,10 @@ def register():
             flash('Username already taken!')
             return render_template('register.html')
 
+        default_image = "images/avatars/account-pfp.png"
+
         hashed_password = ph.hash(password)
-        cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+        cursor.execute('INSERT INTO users (username, password, image) VALUES (?, ?, ?)', (username, hashed_password, default_image))
         connection.commit()
         connection.close()
 
@@ -327,6 +329,48 @@ def account():
     
     return render_template('account.html', 
                            username = username)
+
+@app.route('/changepfp', methods=['POST'])
+def change_pfp():
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    username = session.get("username")
+
+    picture = request.files.get('profile_picture')
+
+    UPLOAD_FOLDER = 'static/images/avatars'
+
+    if picture and picture.filename != '':
+
+        img = Image.open(picture)
+
+        w, h = img.size
+        left = (w // 2) - 256
+        right = (w // 2) + 256
+        top = (h // 2) - 256
+        bottom = (h // 2) + 256
+
+        cropped = img.crop((left, top, right, bottom))
+
+        base_name = secure_filename(username)
+
+        filename = base_name + ".png"
+
+        filepath = os.path.join(UPLOAD_FOLDER, filename)
+
+        cropped.save(filepath)
+
+        cursor.execute(
+            "UPDATE users SET image = ? WHERE username = ?",
+            (filepath, username)
+        )
+
+        connection.commit()
+
+    return redirect('/account')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

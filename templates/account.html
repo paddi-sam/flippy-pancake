@@ -36,31 +36,31 @@
                 Change Avatar
             </h1>
         
-            <label id="upload-box" class="drop-zone flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer transition hover:bg-gray-800 mb-10">
+            <form method="POST" action="/changepfp" enctype="multipart/form-data">
+            
+                <input type="file" name="profile_picture" id="profile_picture" class="hidden">
+            
+                <label for="profile_picture"
+                    class="drop-zone flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer transition hover:bg-gray-800 mb-10">
 
-              <span id="upload-text" class="text-white text-xl">
-                Drag & Drop or Click to Upload
-              </span>
-          
-              <span id="file-name" class="text-sm text-gray-300 mt-2">
-                No file selected
-              </span>
-          
-              <input type="file" name="product_image" class="file-input hidden">
-            </label>
+        <span id="upload-text" class="text-white text-xl">
+            Drag & Drop or Click to Upload
+        </span>
 
-            <div class="flex gap-3">
+        <span id="file-name" class="text-sm text-gray-300 mt-2">
+            No file selected
+                    </span>
+                
+                </label>
                 <button type="submit"
                     class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg cursor-pointer text-white">
                     Add
                 </button>
-            
-                <button type="button" id="closemodal1"
-                    class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg cursor-pointer text-white">
-                    Close
-                </button>
-            </div>
-        
+            </form>
+            <button type="button" id="closemodal1"
+                class="bg-black hover:bg-gray-800 px-4 py-2 rounded-lg cursor-pointer text-white">
+                Close
+            </button>
         </div>
     </div>
 

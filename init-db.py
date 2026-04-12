@@ -77,7 +77,8 @@ cursor.execute('''
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        image TEXT NOT NULL
     )
 ''')
 
@@ -91,6 +92,8 @@ cursor.execute('''
 ''')
 
 try:
+    # UNCOMMENT IF YOU WANT STARTING PRODUCTS
+
     cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
                    (1, 'Berries & Cream', 5.49, 'static/images/berries-cream.jpg'))
 
