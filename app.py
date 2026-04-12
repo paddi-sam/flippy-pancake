@@ -318,9 +318,9 @@ def add_item():
 
         return redirect(url_for('staff_menu'))
 
-@app.route('/tailwind')
-def tailwind():
-    return render_template('tailwind.html')
+@app.route('/account')
+def account():
+    return render_template('account.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

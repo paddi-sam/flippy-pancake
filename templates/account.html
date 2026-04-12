@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link rel="preload" href="{{ url_for('static', filename='css/output.css') }}" as="style">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+<body class="bg-[#1A1A1A] flex flex-col items-center">
+    <div class="w-full h-auto bg-[#242424] flex flex-col text-center">
+        <div class="text-7xl text-white p-5 font-bold">Account</div>
+    </div>
+
+    <div class="w-64 h-64 bg-white my-10">
+        Profile pic here
+    </div>
+
+    <div class="w-64 h-auto bg-white mb-10">
+        USERNAME
+    </div>
+
+    <div class="w-[512px] h-[256px] bg-white">
+        info here
+    </div>
+
+    <div class="w-[512px] h-[256px] bg-white mt-10">
+        allergy info here
+    </div>
+
+    <div class="w-256px h-auto bg-white mt-10">
+        logout and delete account
+    </div>
+</body>
+</html>
