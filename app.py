@@ -21,10 +21,19 @@ def index():
     connection = sqlite3.connect('DB.db')
     cursor = connection.cursor()
 
+    username = session.get("username")
+
+    cursor.execute('SELECT image FROM users WHERE username = ?', (username,))
+    row = cursor.fetchone()
+
+    pfp = row[0] if row and row[0] else "static/images/avatars/account-pfp.png"
+
     cursor.execute('SELECT NAME, PRICE, IMAGE FROM items')
     products = cursor.fetchall()
 
-    return render_template('index.html', items = products)
+    return render_template('index.html',
+                            items = products,
+                            pfp = pfp)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -324,11 +333,17 @@ def add_item():
 def account():
     connection = sqlite3.connect('DB.db')
     cursor = connection.cursor()
-    
+
     username = session.get("username")
-    
+
+    cursor.execute('SELECT image FROM users WHERE username = ?', (username,))
+    row = cursor.fetchone()
+
+    pfp = row[0] if row and row[0] else "static/images/avatars/account-pfp.png"
+
     return render_template('account.html', 
-                           username = username)
+                           username = username,
+                           pfp = pfp)
 
 @app.route('/changepfp', methods=['POST'])
 def change_pfp():
@@ -346,21 +361,13 @@ def change_pfp():
 
         img = Image.open(picture)
 
-        w, h = img.size
-        left = (w // 2) - 256
-        right = (w // 2) + 256
-        top = (h // 2) - 256
-        bottom = (h // 2) + 256
-
-        cropped = img.crop((left, top, right, bottom))
-
         base_name = secure_filename(username)
 
         filename = base_name + ".png"
 
         filepath = os.path.join(UPLOAD_FOLDER, filename)
 
-        cropped.save(filepath)
+        img.save(filepath)
 
         cursor.execute(
             "UPDATE users SET image = ? WHERE username = ?",
