@@ -64,10 +64,17 @@
         </div>
     </div>
 
-    <button id="openmodal1"
-        class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all cursor-pointer my-4" type="button">
-        Change Avatar
-    </button>
+    <div class="w-full flex justify-center gap-6 p-4">
+        <button id="openmodal1"
+            class="bg-[#A4133C] hover:bg-[#c9184a] text-white py-2 px-4 rounded-lg transition-all cursor-pointer">
+            Change Avatar
+        </button>
+    
+        <form action="/deletepfp" method="POST"
+            class="hover:bg-[#A4133C] text-white py-2 px-4 rounded-lg transition-all cursor-pointer border-[#A4133C] border-2">
+            <button type="submit">Delete Avatar</button>
+        </form>
+    </div>
 
     <div class="w-64 h-auto bg-[#242424] mb-10 p-2 text-center rounded-xl">
         <div class="text-5xl font-semibold text-white">

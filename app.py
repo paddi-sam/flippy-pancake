@@ -378,6 +378,33 @@ def change_pfp():
 
     return redirect('/account')
 
+@app.route('/deletepfp', methods=['POST'])
+def delete_pfp():
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    username = session.get("username")
+
+    DEFAULT_PFP = "static/images/avatars/account-pfp.png"
+
+    cursor.execute(
+        'SELECT image FROM users WHERE username = ?',
+        (username,)
+    )
+    row = cursor.fetchone()
+
+    if row and row[0] and row[0] != DEFAULT_PFP and os.path.exists(row[0]):
+        os.remove(row[0])
+
+    cursor.execute(
+        'UPDATE users SET image = ? WHERE username = ?',
+        (DEFAULT_PFP,username,)
+    )
+
+    connection.commit()
+    connection.close()
+
+    return redirect('/account')
 
 if __name__ == '__main__':
     app.run(debug=True)
