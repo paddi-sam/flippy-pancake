@@ -19,6 +19,29 @@
       {% endif %}
     {% endwith %}
 
+    <div id="modal3"
+         class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-200 z-50">
+
+        <div class="bg-[#111111] border border-white/10 rounded-xl p-6 w-[30%] flex flex-col items-center">
+
+            <h1 class="text-xl font-bold mb-4 text-[#A4133C]">
+                Change your username
+            </h1>
+            <form method="post" action="/changeusername">
+                <input type="text" name="username" placeholder="New Username" required
+                    class="w-full mb-3 p-2 rounded-lg bg-gray border-2 focus:outline-none focus:border-[#A4133C] border-[#A4133C] text-white">
+            
+                <div class="w-auto h-auto flex flex-row gap-2">
+                    <button type="submit" class="px-4 py-2 rounded-lg cursor-pointer bg-[#A4133C] hover:bg-[#000000] mx-2 text-white">Change username</button>
+                    <button type="button" id="closemodal3"
+                        class="hover:bg-[#A4133C] text-white py-2 px-4 rounded-lg transition-all cursor-pointer border-[#A4133C] border-2">
+                        Close
+                    </button>
+                </div>
+            </form>    
+        </div>
+    </div>
+
     <div class="w-full h-auto bg-[#242424] flex flex-col text-center">
         <div class="text-7xl text-white p-5 font-bold">Account</div>
     </div>
@@ -76,10 +99,16 @@
         </form>
     </div>
 
-    <div class="w-64 h-auto bg-[#242424] mb-10 p-2 text-center rounded-xl">
-        <div class="text-5xl font-semibold text-white">
-            {{ username }}
+    <div class="w-full flex justify-center gap-6 p-4">
+        <div class="w-64 bg-[#242424] py-4 text-center rounded-xl gap-2 mr-5">
+            <div class="text-4xl font-semibold text-white">
+                {{ username }}
+            </div>
         </div>
+
+        <button class="bg-[#A4133C] px-6 py-3 rounded-2xl text-white font-semibold text-lg hover:bg-[#c9184a] transition gap-2 ml-5 cursor-pointer" id="openmodal3">
+            Change username
+        </button>
     </div>
 
     <div class="w-[512px] h-[256px] bg-[#242424] rounded-2xl">

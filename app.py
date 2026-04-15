@@ -406,5 +406,35 @@ def delete_pfp():
 
     return redirect('/account')
 
+@app.route('/changeusername', methods=['POST'])
+def change_username():
+    username = session.get("username")
+    new_username = request.form.get('username')
+
+    if new_username == username:
+        flash("That's already your username.")
+        return redirect('/account')
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT username FROM users WHERE username = ?', (new_username,))
+
+    exists = cursor.fetchone() is not None
+
+    if exists:
+        flash("Username already taken, pick another one!")
+    else:
+        cursor.execute('UPDATE users SET username = ? WHERE username = ?', (new_username, username))
+        connection.commit()
+
+        session["username"] = new_username
+
+        flash("Username updated successfully!")
+
+    connection.close()
+
+    return redirect('/account')
+
 if __name__ == '__main__':
     app.run(debug=True)
