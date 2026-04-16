@@ -8,18 +8,15 @@
 </head>
 <body class="bg-[#1A1A1A] text-white min-h-screen relative">
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="fixed top-5 inset-x-0 flex justify-center z-50">
-                <div class="flex flex-col items-center space-y-2">
-                    {% for message in messages %}
-                        <div class="bg-red-600 text-white px-4 py-2 rounded shadow">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </div>
+      {% if messages %}
+        <div class="fixed top-5 left-1/2 -translate-x-1/2 space-y-2 z-50">
+          {% for message in messages %}
+            <div class="bg-[#A4133C] text-white px-4 py-2 rounded-lg shadow">
+              {{ message }}
             </div>
-            </div>
-        {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endwith %}
 
     <a href="{{ url_for('index') }}" class="absolute top-4 left-4 hover:scale-105 transition-transform bg-white/20 p-3 rounded-2xl">

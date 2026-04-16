@@ -10,9 +10,11 @@
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <div class="flash-message-welcome">
+        <div class="fixed top-5 left-1/2 -translate-x-1/2 space-y-2 z-50">
           {% for message in messages %}
-            {{ message }}
+            <div class="bg-[#A4133C] text-white px-4 py-2 rounded-lg shadow">
+              {{ message }}
+            </div>
           {% endfor %}
         </div>
       {% endif %}
