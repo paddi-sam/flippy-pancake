@@ -79,7 +79,8 @@ cursor.execute('''
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
         image TEXT NOT NULL,
-        preferred_address TEXT NOT NULL
+        preferred_address TEXT NOT NULL,
+        total_orders INTEGAR NOT NULL
     )
 ''')
 

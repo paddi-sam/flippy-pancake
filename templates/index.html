@@ -6,7 +6,7 @@
     <link rel="preload" href="{{ url_for('static', filename='css/output.css') }}" as="style">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
   </head>
-  <body class="bg-[#1A1A1A] w-full">
+  <body class="bg-[#1A1A1A] w-auto">
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -102,6 +102,15 @@
           <button id="next" class="text-white font-bold bg-[#2A2A2A] px-6 py-2 rounded-lg hover:bg-[#A4133C] cursor-pointer transition">Next</button>
         </div>
     </div>
+
+    <form action="{{ url_for('add_order') }}" method="post"
+          class="w-[256px] mx-auto mt-6 p-4 border-white border-2 rounded-2xl flex items-center justify-center">
+
+        <button type="submit" class="font-bold text-white text-2xl text-center break-words cursor-pointer">
+            Add Order (temporary dev button)
+        </button>
+      
+    </form>
 
     <div class="flex flex-row items-center justify-center w-full h-auto mt-10">
 

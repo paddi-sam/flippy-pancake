@@ -116,7 +116,7 @@ def register():
         default_image = "images/avatars/account-pfp.png"
 
         hashed_password = ph.hash(password)
-        cursor.execute('INSERT INTO users (username, password, image, preferred_address) VALUES (?, ?, ?, ?)', (username, hashed_password, default_image, preferred))
+        cursor.execute('INSERT INTO users (username, password, image, preferred_address, total_orders) VALUES (?, ?, ?, ?, ?)', (username, hashed_password, default_image, preferred, 0))
         connection.commit()
         connection.close()
 
@@ -337,7 +337,10 @@ def account():
 
     username = session.get("username")
 
-    cursor.execute('SELECT image, preferred_address FROM users WHERE username = ?', (username,))
+    cursor.execute(
+        'SELECT image, preferred_address, total_orders FROM users WHERE username = ?',
+        (username,)
+    )
     row = cursor.fetchone()
 
     if not row:
@@ -345,12 +348,14 @@ def account():
 
     pfp = row[0] if row[0] else "static/images/avatars/account-pfp.png"
     address = row[1] if row[1] else ""
+    total_orders = row[2] if row[2] is not None else 0
 
     return render_template(
         'account.html',
         username=username,
         pfp=pfp,
-        address=address
+        address=address,
+        total_orders=total_orders
     )
 
 @app.route('/changepfp', methods=['POST'])
@@ -462,6 +467,20 @@ def change_address():
     connection.close()
     
     return redirect('/account')
+
+@app.route('/addorder', methods=['POST'])
+def add_order():
+    username = session.get("username")
+    
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    cursor.execute('UPDATE users SET total_orders = total_orders + 1 WHERE username = ?', (username,))
+
+    connection.commit()
+    connection.close()
+
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
