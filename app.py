@@ -72,6 +72,7 @@ def register():
         username = request.form.get('username')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
+        preferred = "None"
 
         if not username or not password or not confirm_password:
             flash('All fields are required!')
@@ -115,7 +116,7 @@ def register():
         default_image = "images/avatars/account-pfp.png"
 
         hashed_password = ph.hash(password)
-        cursor.execute('INSERT INTO users (username, password, image) VALUES (?, ?, ?)', (username, hashed_password, default_image))
+        cursor.execute('INSERT INTO users (username, password, image, preferred_address) VALUES (?, ?, ?, ?)', (username, hashed_password, default_image, preferred))
         connection.commit()
         connection.close()
 
@@ -336,14 +337,21 @@ def account():
 
     username = session.get("username")
 
-    cursor.execute('SELECT image FROM users WHERE username = ?', (username,))
+    cursor.execute('SELECT image, preferred_address FROM users WHERE username = ?', (username,))
     row = cursor.fetchone()
 
-    pfp = row[0] if row and row[0] else "static/images/avatars/account-pfp.png"
+    if not row:
+        return "User not found", 404
 
-    return render_template('account.html', 
-                           username = username,
-                           pfp = pfp)
+    pfp = row[0] if row[0] else "static/images/avatars/account-pfp.png"
+    address = row[1] if row[1] else ""
+
+    return render_template(
+        'account.html',
+        username=username,
+        pfp=pfp,
+        address=address
+    )
 
 @app.route('/changepfp', methods=['POST'])
 def change_pfp():
@@ -434,6 +442,25 @@ def change_username():
 
     connection.close()
 
+    return redirect('/account')
+
+@app.route('/changeaddress', methods=['POST'])
+def change_address():
+    username = session.get("username")
+    street = request.form.get('street', '').strip()
+    city = request.form.get('city', '').strip()
+    postcode = request.form.get('postcode', '').strip()
+
+    address = f"{street}, {city}, {postcode}"
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    cursor.execute('UPDATE users SET preferred_address = ? WHERE username = ?', (address, username))
+
+    connection.commit()
+    connection.close()
+    
     return redirect('/account')
 
 if __name__ == '__main__':

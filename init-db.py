@@ -78,7 +78,8 @@ cursor.execute('''
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        image TEXT NOT NULL
+        image TEXT NOT NULL,
+        preferred_address TEXT NOT NULL
     )
 ''')
 
