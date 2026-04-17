@@ -206,4 +206,10 @@ document.addEventListener("DOMContentLoaded", () => {
     openId: "openmodal3",
     closeId: "closemodal3"
   });
+
+    setupModal({
+    modalId: "modal4",
+    openId: "openmodal4",
+    closeId: "closemodal4"
+  });
 });
