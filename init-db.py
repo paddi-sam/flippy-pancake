@@ -16,6 +16,8 @@ print(r"""
 conn = sqlite3.connect('DB.db')
 cursor = conn.cursor()
 
+allergens = ["celery", "gluten", "crustaceans","eggs","fish","lupin","milk","molluscs","mustard","nuts","peanuts","sesame seeds","soya","sulphites"]
+
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS staff (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -116,5 +118,29 @@ try:
 except sqlite3.IntegrityError:
     pass
 
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS allergens(
+        allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        allergen_name STRING NOT NULL
+    )
+''')
+
+
+for i in allergens:
+    try:
+        cursor.execute('INSERT INTO allergens (allergen_name) VALUES (?)', (i,))
+    except sqlite3.IntegrityError:
+        pass
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS user_allergens (
+        user_id INTEGER NOT NULL,
+        allergen_id INTEGER NOT NULL,
+        PRIMARY KEY (user_id, allergen_id),
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (allergen_id) REFERENCES allergens(allergen_id)
+    )
+''')
+        
 conn.commit()
 conn.close()
