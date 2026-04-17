@@ -341,21 +341,27 @@ def account():
         'SELECT image, preferred_address, total_orders FROM users WHERE username = ?',
         (username,)
     )
-    row = cursor.fetchone()
+    user = cursor.fetchone()
 
-    if not row:
+    cursor.execute(
+        'SELECT * FROM allergens' 
+    )
+    allergens = cursor.fetchall()
+
+    if not user:
         return "User not found", 404
 
-    pfp = row[0] if row[0] else "static/images/avatars/account-pfp.png"
-    address = row[1] if row[1] else ""
-    total_orders = row[2] if row[2] is not None else 0
+    pfp = user[0] if user[0] else "static/images/avatars/account-pfp.png"
+    address = user[1] if user[1] else ""
+    total_orders = user[2] if user[2] is not None else 0
 
     return render_template(
         'account.html',
         username=username,
         pfp=pfp,
         address=address,
-        total_orders=total_orders
+        total_orders=total_orders,
+        allergens = allergens,
     )
 
 @app.route('/changepfp', methods=['POST'])
@@ -481,6 +487,47 @@ def add_order():
     connection.close()
 
     return redirect('/')
+
+@app.route('/updateallergens', methods=["POST"])
+def update_allergens():
+
+    username = session.get("username")
+
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT id FROM users WHERE username=?', (username,))
+    user_row = cursor.fetchone()
+
+    if user_row:
+        user_id = user_row[0]
+    else:
+        flash("User not found.")
+        return redirect('/login')
+    
+    selected_allergens = request.form.getlist('allergens')
+
+    try:
+        cursor.execute('DELETE FROM user_allergens WHERE user_id = ?', (user_id,))
+
+        for allergen_id in selected_allergens:
+            cursor.execute(
+                'INSERT INTO user_allergens (user_id, allergen_id) VALUES (?, ?)', 
+                (user_id, allergen_id)
+            )
+            
+        connection.commit()
+        flash("Allergies updated successfully!")
+        
+    except Exception as e:
+        connection.rollback()
+        flash("An error occurred.")
+        print(e)
+        
+    finally:
+        connection.close()
+
+    return redirect('/account')
 
 if __name__ == '__main__':
     app.run(debug=True)
