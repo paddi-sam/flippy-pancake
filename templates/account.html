@@ -91,7 +91,11 @@
                     
                     <span>{{ allergen[1] }}</span> 
                     
-                    <input type="checkbox" name="allergens" value="{{ allergen[0] }}" class="w-6 h-6 accent-[#A4133C]">
+                    <input type="checkbox"
+                        name="allergens"
+                        value="{{ allergen[0] }}"
+                        class="w-6 h-6 accent-[#A4133C] cursor-pointer"
+                        {% if allergen[0] in user_allergens %}checked{% endif %}>
                     
                 </label>
             {% endfor %}            

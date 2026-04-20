@@ -337,16 +337,20 @@ def account():
 
     username = session.get("username")
 
+    # get user id
+    cursor.execute(
+        'SELECT id FROM users WHERE username = ?',
+        (username,)
+    )
+    user_row = cursor.fetchone()
+    user_id = user_row[0] if user_row else None
+
+    # get user info
     cursor.execute(
         'SELECT image, preferred_address, total_orders FROM users WHERE username = ?',
         (username,)
     )
     user = cursor.fetchone()
-
-    cursor.execute(
-        'SELECT * FROM allergens' 
-    )
-    allergens = cursor.fetchall()
 
     if not user:
         return "User not found", 404
@@ -355,13 +359,27 @@ def account():
     address = user[1] if user[1] else ""
     total_orders = user[2] if user[2] is not None else 0
 
+    # get all allergens
+    cursor.execute('SELECT * FROM allergens')
+    allergens = cursor.fetchall()
+
+    # get selected allergens
+    cursor.execute(
+        'SELECT allergen_id FROM user_allergens WHERE user_id = ?',
+        (user_id,)
+    )
+    user_allergens = [row[0] for row in cursor.fetchall()]
+
+    connection.close()
+
     return render_template(
         'account.html',
         username=username,
         pfp=pfp,
         address=address,
         total_orders=total_orders,
-        allergens = allergens,
+        allergens=allergens,
+        user_allergens=user_allergens
     )
 
 @app.route('/changepfp', methods=['POST'])
