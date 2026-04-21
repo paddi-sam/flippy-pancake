@@ -5,6 +5,8 @@ from argon2.exceptions import VerifyMismatchError
 import os
 from werkzeug.utils import secure_filename
 from PIL import Image
+import secrets
+import string
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
@@ -14,6 +16,24 @@ ph=PasswordHasher()
 UPLOAD_FOLDER = 'static/images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def discount_db_for_user(username, result):
+    with sqlite3.connect('DB.db') as connection:
+        cursor = connection.cursor()
+
+        cursor.execute('SELECT id FROM users WHERE username=?', (username,))
+        user_row = cursor.fetchone()
+
+        if user_row is None:
+            raise ValueError(f"User '{username}' not found")
+
+        user_id = user_row[0]
+
+        cursor.execute(
+            'INSERT INTO discounts (discount_code, user_id) VALUES (?, ?)',
+            (result, user_id)
+        )
+
 
 @app.route('/')
 def index():
@@ -116,7 +136,7 @@ def register():
         default_image = "images/avatars/account-pfp.png"
 
         hashed_password = ph.hash(password)
-        cursor.execute('INSERT INTO users (username, password, image, preferred_address, total_orders) VALUES (?, ?, ?, ?, ?)', (username, hashed_password, default_image, preferred, 0))
+        cursor.execute('INSERT INTO users (username, password, image, preferred_address, total_orders, progress) VALUES (?, ?, ?, ?, ?, ?)', (username, hashed_password, default_image, preferred, 0, 0))
         connection.commit()
         connection.close()
 
@@ -499,7 +519,30 @@ def add_order():
     connection = sqlite3.connect('DB.db')
     cursor = connection.cursor()
 
-    cursor.execute('UPDATE users SET total_orders = total_orders + 1 WHERE username = ?', (username,))
+    cursor.execute('SELECT progress FROM users WHERE username = ?', (username,))
+    row = cursor.fetchone()
+    progress = row[0] if row else 0
+
+    progress += 25
+
+    if progress >= 100:
+        alphabet = string.ascii_letters + string.digits
+        result = ''.join(secrets.choice(alphabet) for _ in range(16))
+
+        discount_db_for_user(username, result)
+        progress = 0
+
+    cursor.execute(
+        'UPDATE users SET total_orders = total_orders + 1, progress = ? WHERE username = ?',
+        (progress, username)
+    )
+
+    if progress > 100:
+        alphabet = string.ascii_letters + string.digits
+        result = ''.join(secrets.choice(alphabet) for _ in range(16))
+
+        discount_db_for_user(username, result)
+        progress = 0        
 
     connection.commit()
     connection.close()

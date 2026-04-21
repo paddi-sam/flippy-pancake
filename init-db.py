@@ -19,6 +19,14 @@ cursor = conn.cursor()
 allergens = ["celery", "gluten", "crustaceans","eggs","fish","lupin","milk","molluscs","mustard","nuts","peanuts","sesame seeds","soya","sulphites"]
 
 cursor.execute('''
+    CREATE TABLE IF NOT EXISTS discounts (
+        discount_code TEXT PRIMARY KEY,
+        user_id INTEGER,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+''')
+
+cursor.execute('''
     CREATE TABLE IF NOT EXISTS staff (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
@@ -82,7 +90,8 @@ cursor.execute('''
         password TEXT NOT NULL,
         image TEXT NOT NULL,
         preferred_address TEXT NOT NULL,
-        total_orders INTEGAR NOT NULL
+        total_orders INTEGAR NOT NULL,
+        progress INTEGAR NOT NULL
     )
 ''')
 
