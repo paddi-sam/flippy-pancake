@@ -25,7 +25,7 @@
         <div class="text-7xl text-white p-5 font-bold">Account</div>
     </div>
 
-    <div class="w-64 h-64 bg-white mt-10 overflow-hidden rounded-full flex items-center justify-center">
+    <div class="w-64 h-64 bg-white mt-2 overflow-hidden rounded-full flex items-center justify-center">
         <img src="{{ pfp }}" class="w-full h-full object-cover"> 
     </div>
 
@@ -77,8 +77,16 @@
             </div>
         </div>
         <div class="w-[95%] mt-5 p-2 flex flex-col justify-center items-center bg-[#343434] text-black rounded-lg">
-            <div class="text-white text-2xl font-bold mb-10">Loyalty Scheme</div>
-            <div class="w-full h-[10px] bg-gradient-to-r from-[#A4133C] to-[#ffadc4] rounded-2xl"></div>
+            <div class="text-white text-2xl font-bold mb-2">Loyalty Scheme</div>
+            <div class="text-white text-2xl font-bold mb-10">{{ progress }}%</div>           
+            <div class="w-full h-[10px] bg-gray-700 rounded-2xl overflow-hidden">
+                <div 
+                    id="loyaltyBar"
+                    class="h-[10px] bg-gradient-to-r from-[#A4133C] to-[#ffadc4] rounded-2xl transition-all duration-700"
+                    data-value="{{ progress }}"
+                    style="width: 0%">
+                </div>
+            </div>         
         </div>
     </div>
 

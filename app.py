@@ -277,7 +277,6 @@ def staff_register():
         flash('Staff added')
         return redirect(url_for('staff_menu'))
 
-
 @app.route('/delete_staff', methods=['POST'])
 def delete_staff():
     user_id = request.form.get('user_id')
@@ -393,6 +392,14 @@ def account():
     )
     user_allergens = [row[0] for row in cursor.fetchall()]
 
+    # get progress
+    cursor.execute(
+        'SELECT progress FROM users WHERE id = ?',
+        (user_id,)
+    )
+    progress = cursor.fetchone()
+    progress = progress[0]
+
     connection.close()
 
     return render_template(
@@ -402,7 +409,8 @@ def account():
         address=address,
         total_orders=total_orders,
         allergens=allergens,
-        user_allergens=user_allergens
+        user_allergens=user_allergens,
+        progress=progress
     )
 
 @app.route('/changepfp', methods=['POST'])

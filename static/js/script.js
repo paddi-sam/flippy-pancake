@@ -213,3 +213,10 @@ document.addEventListener("DOMContentLoaded", () => {
     closeId: "closemodal4"
   });
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+    const bar = document.getElementById("loyaltyBar");
+    setTimeout(() => {
+        bar.style.width = bar.dataset.value + "%";
+    }, 100);
+});
