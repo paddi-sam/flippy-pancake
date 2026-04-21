@@ -30,7 +30,10 @@ def discount_db_for_user(username, result):
         user_id = user_row[0]
 
         cursor.execute(
-            'INSERT INTO discounts (discount_code, user_id) VALUES (?, ?)',
+            '''
+            INSERT OR REPLACE INTO discounts (discount_code, user_id)
+            VALUES (?, ?)
+            ''',
             (result, user_id)
         )
 
