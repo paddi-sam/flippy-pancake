@@ -16,6 +16,16 @@ print(r"""
 conn = sqlite3.connect('DB.db')
 cursor = conn.cursor()
 
+allergens = ["celery", "gluten", "crustaceans","eggs","fish","lupin","milk","molluscs","mustard","nuts","peanuts","sesame seeds","soya","sulphites"]
+
+cursor.execute('''
+    CREATE TABLE discounts (
+        id INTEGER PRIMARY KEY,
+        discount_code TEXT,
+        user_id INTEGER UNIQUE
+    );
+''')
+
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS staff (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -77,7 +87,11 @@ cursor.execute('''
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        image TEXT NOT NULL,
+        preferred_address TEXT NOT NULL,
+        total_orders INTEGAR NOT NULL,
+        progress INTEGAR NOT NULL
     )
 ''')
 
@@ -91,6 +105,8 @@ cursor.execute('''
 ''')
 
 try:
+    # UNCOMMENT IF YOU WANT STARTING PRODUCTS
+
     cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
                    (1, 'Berries & Cream', 5.49, 'static/images/berries-cream.jpg'))
 
@@ -111,5 +127,29 @@ try:
 except sqlite3.IntegrityError:
     pass
 
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS allergens(
+        allergen_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        allergen_name STRING NOT NULL
+    )
+''')
+
+
+for i in allergens:
+    try:
+        cursor.execute('INSERT INTO allergens (allergen_name) VALUES (?)', (i,))
+    except sqlite3.IntegrityError:
+        pass
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS user_allergens (
+        user_id INTEGER NOT NULL,
+        allergen_id INTEGER NOT NULL,
+        PRIMARY KEY (user_id, allergen_id),
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (allergen_id) REFERENCES allergens(allergen_id)
+    )
+''')
+        
 conn.commit()
 conn.close()

@@ -8,15 +8,15 @@
 </head>
 <body class="bg-[url('/static/images/icons/login.jpg')] bg-cover bg-center bg-black/60 bg-blend-overlay min-h-screen backdrop-blur-sm h-screen w-screen flex flex-col items-center justify-center">
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="absolute top-5 flex flex-col space-y-2 z-50">
-                {% for message in messages %}
-                    <div class="bg-red-600 text-white px-4 py-2 rounded shadow">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+      {% if messages %}
+        <div class="fixed top-5 left-1/2 -translate-x-1/2 space-y-2 z-50">
+          {% for message in messages %}
+            <div class="bg-[#A4133C] text-white px-4 py-2 rounded-lg shadow">
+              {{ message }}
             </div>
-        {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endwith %}
     <div class="w-1/2 h-auto bg-[#1A1A1A] rounded-2xl flex flex-col items-center overflow-hidden p-10">
         <div class="font-bold text-5xl md:text-6xl my-6 mb-32 text-white text-center">Flippy Pancakes Staff Login</div>

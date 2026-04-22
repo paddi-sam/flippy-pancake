@@ -134,84 +134,89 @@ setTimeout(() => {
   });
 }, 3000);
 
-document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("openmodal1");
-  const closeBtn = document.getElementById("closemodal1");
-  const modal1 = document.getElementById("modal1");
+function setupFileUpload({ dropZone, fileInput, fileNameDisplay }) {
+  if (!dropZone || !fileInput || !fileNameDisplay) return;
 
-  if (modal1 && openBtn && closeBtn) {
-    openBtn.addEventListener("click", (e) => {
-      e.preventDefault();
+  dropZone.addEventListener('click', () => fileInput.click());
 
-      modal1.classList.add("opacity-100", "pointer-events-auto");
-      modal1.classList.remove("opacity-0", "pointer-events-none");
-    });
+  dropZone.addEventListener('dragover', (e) => e.preventDefault());
 
-    closeBtn.addEventListener("click", () => {
-      modal1.classList.add("opacity-0", "pointer-events-none");
-      modal1.classList.remove("opacity-100", "pointer-events-auto");
-    });
-
-    modal1.addEventListener("click", (e) => {
-      if (e.target === modal1) {
-        modal1.classList.add("opacity-0", "pointer-events-none");
-        modal1.classList.remove("opacity-100", "pointer-events-auto");
-      }
-    });
-
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file-input');
-    const fileNameDisplay = document.getElementById('file-name');
-
-    if (dropZone && fileInput && fileNameDisplay) {
-      dropZone.addEventListener('click', () => fileInput.click());
-
-      dropZone.addEventListener('dragover', (e) => e.preventDefault());
-
-      dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        handleFile(e.dataTransfer.files[0]);
-      });
-
-      fileInput.addEventListener('change', () =>
-        handleFile(fileInput.files[0])
-      );
-
-      function handleFile(file) {
-        if (!file) return;
-
-        fileNameDisplay.textContent = file.name;
-
-        const formData = new FormData();
-        formData.append('image', file);
-
-        fetch('/upload', { method: 'POST', body: formData });
-      }
-    }
-  }
-});
-
-const openBtn2 = document.getElementById("openmodal2");
-const closeBtn2 = document.getElementById("closemodal2");
-const modal2 = document.getElementById("modal2");
-
-if (modal2 && openBtn2 && closeBtn2) {
-  openBtn2.addEventListener("click", (e) => {
+  dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
-
-    modal2.classList.remove("opacity-0", "pointer-events-none");
-    modal2.classList.add("opacity-100", "pointer-events-auto");
+    handleFile(e.dataTransfer.files[0]);
   });
 
-  closeBtn2.addEventListener("click", () => {
-    modal2.classList.add("opacity-0", "pointer-events-none");
-    modal2.classList.remove("opacity-100", "pointer-events-auto");
+  fileInput.addEventListener('change', () =>
+    handleFile(fileInput.files[0])
+  );
+
+  function handleFile(file) {
+    if (!file) return;
+
+    fileNameDisplay.textContent = file.name;
+
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    fetch('/upload', { method: 'POST', body: formData });
+  }
+}
+
+function setupModal({ modalId, openId, closeId }) {
+  const modal = document.getElementById(modalId);
+  const openBtn = document.getElementById(openId);
+  const closeBtn = document.getElementById(closeId);
+
+  if (!modal || !openBtn || !closeBtn) return;
+
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.classList.remove("opacity-0", "pointer-events-none");
+    modal.classList.add("opacity-100", "pointer-events-auto");
   });
 
-  modal2.addEventListener("click", (e) => {
-    if (e.target === modal2) {
-      modal2.classList.add("opacity-0", "pointer-events-none");
-      modal2.classList.remove("opacity-100", "pointer-events-auto");
-    }
+  function closeModal() {
+    modal.classList.add("opacity-0", "pointer-events-none");
+    modal.classList.remove("opacity-100", "pointer-events-auto");
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
   });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupModal({
+    modalId: "modal1",
+    openId: "openmodal1",
+    closeId: "closemodal1"
+  });
+
+  setupModal({
+    modalId: "modal2",
+    openId: "openmodal2",
+    closeId: "closemodal2"
+  });
+
+  setupModal({
+    modalId: "modal3",
+    openId: "openmodal3",
+    closeId: "closemodal3"
+  });
+
+    setupModal({
+    modalId: "modal4",
+    openId: "openmodal4",
+    closeId: "closemodal4"
+  });
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const bar = document.getElementById("loyaltyBar");
+    setTimeout(() => {
+        bar.style.width = bar.dataset.value + "%";
+    }, 100);
+});
