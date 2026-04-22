@@ -117,12 +117,14 @@
     </div>
 
     <div class="w-auto h-auto flex flex-row mb-20">
-        <div class="w-auto h-auto mt-10 bg-[#A4133C] hover:bg-[#c9184a] p-4 rounded-2xl cursor-pointer mx-2 duration-200">
-            <div class="font-bold text-white">Delete Account</div>
-        </div>
-        <div class="border-[#A4133C] border-2 w-auto h-auto mt-10 hover:bg-[#A4133C] p-4 rounded-2xl cursor-pointer mx-2 duration-200">
+        <form action="{{ url_for('delete_account') }}" method="POST">
+            <button type="submit" class="w-auto h-auto mt-10 bg-[#A4133C] hover:bg-[#c9184a] p-4 rounded-2xl cursor-pointer mx-2 duration-200 border-none">
+                <div class="font-bold text-white text-center">Delete Account</div>
+            </button>
+        </form>
+        <a href="/logout" class="border-[#A4133C] border-2 w-auto h-auto mt-10 hover:bg-[#A4133C] p-4 rounded-2xl cursor-pointer mx-2 duration-200 block">
             <div class="font-bold text-white">Logout</div>
-        </div>
+        </a>
     </div>
 
     <a href="{{ url_for('index') }}" class="absolute top-4 left-4 hover:scale-105 transition-transform bg-white/20 p-3 rounded-2xl">
