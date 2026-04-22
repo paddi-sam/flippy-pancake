@@ -2,11 +2,10 @@
 module.exports = {
   content: [
     "./templates/**/*.html",
-    "./static/**/*.{js,html}",
-    "./**/*.html"
+    "./static/**/*.{html,js}",
   ],
   theme: {
     extend: {},
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [],
 }
