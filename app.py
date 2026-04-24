@@ -136,7 +136,7 @@ def register():
             flash('Username already taken!')
             return render_template('register.html')
 
-        default_image = "images/avatars/account-pfp.png"
+        default_image = "static/images/avatars/account-pfp.png"
 
         hashed_password = ph.hash(password)
         cursor.execute('INSERT INTO users (username, password, image, preferred_address, total_orders, progress) VALUES (?, ?, ?, ?, ?, ?)', (username, hashed_password, default_image, preferred, 0, 0))
@@ -612,31 +612,26 @@ def delete_account():
         connection = sqlite3.connect('DB.db')
         cursor = connection.cursor()
 
-        # Fetch user ID from the session
         cursor.execute('SELECT id FROM users WHERE username = ?', (username,))
         user_row = cursor.fetchone()
 
         if user_row:
             user_id = user_row[0]
-            
-            # Fetch the image path before deleting the user
+
             cursor.execute('SELECT image FROM users WHERE id = ?', (user_id,))
             image_row = cursor.fetchone()
             image_path = image_row[0] if image_row else None
-            
-            # Delete the user data from related tables
+
             cursor.execute('DELETE FROM user_allergens WHERE user_id = ?', (user_id,))
             cursor.execute('DELETE FROM discounts WHERE user_id = ?', (user_id,))
             cursor.execute('DELETE FROM users WHERE id = ?', (user_id,))
 
-            # If the user has an avatar, remove it
             if image_path and os.path.exists(image_path) and image_path != "static/images/avatars/account-pfp.png":
                 os.remove(image_path)
             
             connection.commit()
             connection.close()
 
-            # Logout user after account deletion
             session.pop('username', None)
             session.pop('staff', None)
             session.pop('staff-username', None)
