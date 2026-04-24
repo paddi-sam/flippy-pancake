@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Products</title>
+    <link rel="preload" href="{{ url_for('static', filename='css/output.css') }}" as="style">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
 </head>
-<body>
-    <h1, style="display: flex; justify-content: center; align-items: center;">Coming soon</h1>
+<body class="bg-[#1A1A1A] justify-center items-center flex flex-col">
+    <div class="text-[#d11c4f] font-bold text-5xl mt-5">Flippy pancake products</div>
+    <div class="bg-[#111111] mt-20 w-[92%] h-[82vh] rounded-xl flex flex-col items-center">
+        <div class="w-[98%] h-[50px] bg-white rounded-2xl p-3 cursor-text">Search products</div>
+        <div class="w-[98%] h-[50px] rounded-2xl flex items-center gap-3 px-4 mt-3">
+          <div class="bg-[#A4133C] text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-[#c9184a]">Pancakes</div>
+          <div class="bg-[#A4133C] text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-[#c9184a]">Waffles</div>
+          <div class="bg-[#A4133C] text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-[#c9184a]">Other</div>
+        </div>
+    </div>
 </body>
 </html>
