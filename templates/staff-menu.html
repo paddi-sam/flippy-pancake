@@ -128,11 +128,27 @@
             
                 <input type="text" name="price" placeholder="xx.xx" required
                     class="w-full mb-3 p-2 rounded-lg bg-black border border-white/10 focus:outline-none focus:border-[#A4133C]">
+
+                <label for="category" class="block mb-2 text-sm font-medium text-gray-700">
+                  Product Category
+                </label>
+
+                <select id="cateogry" name="Cateogry"
+                  class="block w-full px-4 py-2 border border-white/10 rounded-lg bg-black text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-5 focus:border-[#A4133C]">
+
+                  <option value="">Select something</option>
+                  <option value="1">Pancakes</option>
+                  <option value="2">Waffle</option>
+                  <option value="3">Other Item</option>
+                </select>
             
-                <input type="file" name="product_image"
-                    class="w-full mb-4 text-sm">
+                <div class="flex w-auto h-auto border-[#A4133C] border-2 mb-7 rounded-2xl items-center justify-center cursor-pointer">
+                    <input type="file" name="product_image"
+                    class="w-full mb-4 text-sm items-center justify-center flex cursor-pointer">
+                </div>
+
             
-                <div class="flex gap-3">
+                <div class="flex gap-3 mt-5">
                     <button type="submit"
                         class="bg-[#A4133C] hover:bg-[#c9184a] px-4 py-2 rounded-lg cursor-pointer">
                         Add

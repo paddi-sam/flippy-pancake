@@ -100,27 +100,28 @@ cursor.execute('''
         item_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         price REAL NOT NULL,
-        image TEXT NOT NULL
+        image TEXT NOT NULL,
+        category TEXT NOT NULL
     )
 ''')
 
 try:
     # UNCOMMENT IF YOU WANT STARTING PRODUCTS
 
-    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
-                   (1, 'Berries & Cream', 5.49, 'static/images/berries-cream.jpg'))
+    cursor.execute('INSERT INTO items (item_id, name, price, image, category) VALUES (?,?,?,?,?)',
+                   (1, 'Berries & Cream', 5.49, 'static/images/berries-cream.jpg', 'pancake'))
 
-    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
-                   (2, 'Chocolate Stack', 6.99, 'static/images/Chocolate-pancakes.jpg'))
+    cursor.execute('INSERT INTO items (item_id, name, price, image, category) VALUES (?,?,?,?,?)',
+                   (2, 'Chocolate Stack', 6.99, 'static/images/Chocolate-pancakes.jpg', 'pancake'))
 
-    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
-                   (3, 'Lemon and syrup', 6.49, 'static/images/lemon-pancakes.jpg'))
+    cursor.execute('INSERT INTO items (item_id, name, price, image, category) VALUES (?,?,?,?,?)',
+                   (3, 'Lemon and syrup', 6.49, 'static/images/lemon-pancakes.jpg', 'pancake'))
 
-    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
-                   (4, 'Strawberry and sauce', 7.49, 'static/images/strawberry-pancakes.jpg'))
+    cursor.execute('INSERT INTO items (item_id, name, price, image, category) VALUES (?,?,?,?,?)',
+                   (4, 'Strawberry and sauce', 7.49, 'static/images/strawberry-pancakes.jpg', 'pancake'))
 
-    cursor.execute('INSERT INTO items (item_id, name, price, image) VALUES (?,?,?,?)',
-                   (5, 'Gluten free', 6.49, 'static/images/glutenfree-stack.jpg'))
+    cursor.execute('INSERT INTO items (item_id, name, price, image, category) VALUES (?,?,?,?,?)',
+                   (5, 'Gluten free', 6.49, 'static/images/glutenfree-stack.jpg', 'pancake'))
 
     print("Products successfully created")
 

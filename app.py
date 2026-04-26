@@ -319,6 +319,7 @@ def add_item():
 
         product_name = request.form.get('product_name')
         product_price = request.form.get('price')
+        product_category = request.form.get('category')
 
         formatted_file_name = product_name.replace(" ", "-")
 
@@ -344,8 +345,8 @@ def add_item():
                 filepath=os.path.join(UPLOAD_FOLDER, filename)
                 cropped.save(filepath)
 
-        cursor.execute('INSERT INTO items (NAME, PRICE, IMAGE) VALUES (?, ?, ?)',
-                           (product_name, product_price, filepath))
+        cursor.execute('INSERT INTO items (NAME, PRICE, IMAGE, category) VALUES (?, ?, ?, ?)',
+                           (product_name, product_price, filepath, product_category))
 
         connection.commit()
         connection.close()
