@@ -190,7 +190,12 @@ def logout():
 
 @app.route('/menu')
 def menu():
-    return render_template('menu.html')
+    connection = sqlite3.connect('DB.db')
+    cursor = connection.cursor()
+    cursor.execute('SELECT NAME, PRICE, IMAGE FROM items')
+    products = cursor.fetchall()
+    connection.close()
+    return render_template('menu.html', products=products)
 
 @app.route('/staffmenu', methods=['GET', 'POST'])
 def staff_menu():
