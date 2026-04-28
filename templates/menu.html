@@ -16,6 +16,19 @@
           <div class="bg-[#A4133C] text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-[#c9184a]">Waffles</div>
           <div class="bg-[#A4133C] text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-[#c9184a]">Other</div>
         </div>
+        <div class="w-[97%] h-[85%] bg-[#313131] mt-2 rounded-2xl flex flex-col items-center overflow-auto scrollbar-hide">
+            <div class="w-[99%] mt-3 rounded-2xl flex flex-row gap-2 justify-center flex-wrap">
+                {% for product in products %}
+                <div class="w-[24%] h-[40%] bg-[#A4133C] rounded-2xl flex flex-col justify-center items-center mb-2">
+                    {% if product[2] %}
+                    <img src="{{ product[2] }}" alt="{{ product[0] }}" class="w-[95%] h-[70%] object-cover rounded-2xl">
+                    {% endif %}
+                    <div class="text-white text-center mt-2 font-semibold">{{ product[0] }}</div>
+                    <div class="text-[#d11c4f] font-bold text-sm">£{{ product[1] }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </body>
 </html>
